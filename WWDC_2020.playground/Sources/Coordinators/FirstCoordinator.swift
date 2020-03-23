@@ -20,9 +20,10 @@ public class FirstCoordinator: Coordinator {
         self.skView = skView
     }
     
-    func start() {
+    public func start() {
         let launchScene = LaunchScene(size: self.skView.frame.size)
         
+        launchScene.launchSceneDelegate = self
         launchScene.scaleMode = .resizeFill
         
         self.skView.presentScene(launchScene)
@@ -35,6 +36,7 @@ public class FirstCoordinator: Coordinator {
 
 extension FirstCoordinator: LaunchSceneDelegate {
     public func navigateToNextScene() {
+        
         let gameScene = GameScene(size: self.skView.frame.size)
         
         gameScene.scaleMode = .resizeFill

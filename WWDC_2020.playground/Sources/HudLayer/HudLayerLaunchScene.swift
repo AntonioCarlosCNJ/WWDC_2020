@@ -14,7 +14,6 @@ public class HudLayerLaunchScene: SKNode {
         
         //Set scene size
         self.sceneSize = sceneSize
-
         
         //Adding play button to scene
         self.addPlayButtonToScene()
