@@ -37,12 +37,6 @@ public class HudLayerGameScene: SKNode {
         self._sceneSize = sceneSize
         
         //Instantiating the Hud Attributes
-        self._soda = Item(name: "soda", texture: SKTexture(imageNamed: "interactable_items/soda"),
-                         percentage: 20, acidPercentage: 30, itemType: .accelerant)
-        self._sandwich = Item(name: "sandwich", texture: SKTexture(imageNamed: "interactable_items/sandwich"),
-                             percentage: 10, acidPercentage: 5, itemType: .accelerant)
-        self._toothBrush = Item(name: "toothbrush", texture: SKTexture(imageNamed: "interactable_items/toothbrush"),
-                               percentage: 80, acidPercentage: 100, itemType: .retardant)
         
         super.init()
         

@@ -9,26 +9,21 @@ public protocol GameLayerGameSceneDelegate: class {
 public class GameLayerGameScene: SKNode {
     
     //Attributes
-    private var maxReproductionSpeed: CGFloat = 3.0
-    private var minReproductionSpeed: CGFloat = 0.4
-    private var currentReproductionSpeed: CGFloat = 0.4
-    
-    private var reproduceBacteria: SKAction
+    private var currentSpeedReprodution: CGFloat = 3.0 {
+        didSet {
+            self.createActionToReproduceBacteria(speedReproduction: self.currentSpeedReprodution)
+        }
+    }
     
     public weak var delegate: GameLayerGameSceneDelegate?
     
     //Initializers
     public init(mouth: Mouth) {
-        
-        reproduceBacteria = SKAction()
-        
         super.init()
         
         self.delegate = mouth
-        //Starts the reproduction of bacteria
-        reproduceBacteria = self.createActionToReproduceBacteria()
         
-        print("Current Speed: \(currentReproductionSpeed)")
+        self.createActionToReproduceBacteria(speedReproduction: currentSpeedReprodution)
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -36,55 +31,28 @@ public class GameLayerGameScene: SKNode {
     }
     
     //Methods
-    public func changeReproductionSpeedAndAcidityLevel(item: Item, mouth: Mouth) {
-        switch  item.itemType{
-            case .accelerant:
-                mouth.decreaseAcidityLevel(percentage: item.acidPercentage)
-                self.increaseReproductionSpeed(percentage: item.percentage)
-            case .retardant:
-                mouth.increaseAcidityLevel(percentage: item.acidPercentage)
-                self.decreaseReproductionSpeed(percentage: item.percentage)
-        }
-        reproduceBacteria.speed = currentReproductionSpeed
-        print("Current Speed: \(currentReproductionSpeed)")
-    }
     
-    private func increaseReproductionSpeed(percentage: Int) {
-        let percentageFloat = CGFloat(percentage) / 100
-        let newReproductionSpeed = currentReproductionSpeed + currentReproductionSpeed * percentageFloat
+    public func createActionToReproduceBacteria(speedReproduction: TimeInterval) -> SKAction {
         
-        if newReproductionSpeed > maxReproductionSpeed {
-            currentReproductionSpeed = maxReproductionSpeed
-        } else {
-            currentReproductionSpeed = newReproductionSpeed
-        }
-    }
-    
-    private func decreaseReproductionSpeed(percentage: Int) {
-        let percentageFloat = CGFloat(percentage) / 100
-        let newReproductionSpeed = currentReproductionSpeed - currentReproductionSpeed * percentageFloat
-        
-        if newReproductionSpeed < minReproductionSpeed {
-            currentReproductionSpeed = minReproductionSpeed
-        } else {
-            currentReproductionSpeed = newReproductionSpeed
-        }
-    }
-    
-    private func createActionToReproduceBacteria() -> SKAction {
-        let timeToWait = SKAction.wait(forDuration: 2.0)
+        //Create the wait action and the reproduce action
+        let waitAction = SKAction.wait(forDuration: speedReproduction)
         let reproduceAction = SKAction.run {
             self.delegate?.reproduceBacteriaInTeeth()
         }
         
-        let sequence = SKAction.sequence([timeToWait, reproduceAction])
+        //Create the sequence action
+        let sequence = SKAction.sequence([waitAction,
+                                          reproduceAction])
         
-        let repeatForever = SKAction.repeatForever(sequence)
-        repeatForever.speed = currentReproductionSpeed
+        //Create the repeat forever action
+        let repeatForeverAction = SKAction.repeatForever(sequence)
         
-        self.run(repeatForever)
+        //Remove action for that key
+        self.removeAction(forKey: REPRODUCTION_ACTION_KEY)
         
-        return repeatForever
+        //Add the action in the gameLayer
+        self.run(repeatForeverAction, withKey: REPRODUCTION_ACTION_KEY)
+        
     }
     
 }

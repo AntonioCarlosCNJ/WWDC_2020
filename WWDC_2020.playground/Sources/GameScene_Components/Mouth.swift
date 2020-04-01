@@ -23,6 +23,8 @@ public class Mouth {
         }
     }
     
+    public var bacteriaAmount: Int = 0
+    
     
     //Initializers
     public init(texture: SKTexture) {
@@ -76,40 +78,16 @@ public class Mouth {
         
     }
     
-    public func decreaseAcidityLevel(percentage: Int) {
-        let percentageFloat = CGFloat(percentage)/100
-        let newAcidityLevel = currentAcidityLevel - currentAcidityLevel * percentageFloat
-        
-        if  newAcidityLevel > minAcidityLevel {
-            currentAcidityLevel = newAcidityLevel
-        } else {
-            currentAcidityLevel = minAcidityLevel
-        }
-        
-        print("Current pH: \(currentAcidityLevel)")
-    }
-    
-    public func increaseAcidityLevel(percentage: Int) {
-        let percentageFloat = CGFloat(percentage)/100
-        let newAcidityLevel = currentAcidityLevel + currentAcidityLevel * percentageFloat
-        
-        if  newAcidityLevel < maxAcidityLevel {
-            currentAcidityLevel = newAcidityLevel
-        } else {
-            currentAcidityLevel = maxAcidityLevel
-        }
-        
-        print("Current pH: \(currentAcidityLevel)")
-    }
-    
 }
 
 extension Mouth: GameLayerGameSceneDelegate {
     
     public func reproduceBacteriaInTeeth() {
-        for i in 0..<highTeeth.count {
-            highTeeth[i].addBacteriumToTooth()
-            lowTeeth[i].addBacteriumToTooth()
+        if bacteriaAmount < MAX_BACTERIA_AMOUNT {
+            for i in 0..<highTeeth.count {
+                highTeeth[i].addBacteriumToTooth()
+                lowTeeth[i].addBacteriumToTooth()
+            }
         }
     }
     

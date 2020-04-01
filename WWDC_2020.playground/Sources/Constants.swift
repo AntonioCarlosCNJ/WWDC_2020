@@ -12,3 +12,18 @@ public enum zPositionOfElements: CGFloat {
     
 }
 
+/** maxReproductionSpeed: more highest more slower, so if the reproductionSpeed is equal
+    to maxReproductionSpeed the reproduction of bacteria is very slow*/
+
+/** minReproductionSpeed: inverse of maxReproductionSpeed*/
+
+public let MAX_REPRODUCTION_SPEED: Double = 4.0
+public let MIN_REPRODUCTION_SPEED: Double = 1.0
+
+public let MAX_ACIDITY_LEVEL: Double = 7.2
+public let MIN_ACIDITY_LEVEL: Double = 4.5
+
+public let MAX_BACTERIA_AMOUNT: Int = 2880
+public let MAX_BACTERIA_AMOUNT_PER_TOOTH: Int = 180
+
+public let REPRODUCTION_ACTION_KEY: String = "reproduceActionKey"

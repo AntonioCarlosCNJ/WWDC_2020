@@ -18,9 +18,9 @@ public class Tooth {
     }
     
     public func addBacteriumToTooth() {
-        if bacteria.count < 100 {
-            let xPosition = Int.random(in: Int(node.size.width*0.15)..<Int(node.size.width*0.86))
-            let yPosition = Int.random(in: Int(node.size.height*0.17)..<Int(node.size.height*0.84))
+        if bacteria.count < MAX_BACTERIA_AMOUNT_PER_TOOTH {
+            let xPosition = Int.random(in: Int(node.size.width*0.18)..<Int(node.size.width*0.85))
+            let yPosition = Int.random(in: Int(node.size.height*0.17)..<Int(node.size.height*0.83))
             
             let bacterium = SKSpriteNode(imageNamed: "bacterium")
             bacterium.name = "bacterium"
@@ -29,11 +29,6 @@ public class Tooth {
             bacteria.append(bacterium)
             node.addChild(bacterium)
         }
-    }
-    
-    public func removeBacteriumFromTooth(bacteriumNode: SKSpriteNode) {
-        bacteriumNode.removeFromParent()
-//        bacteria.remove(at: )
     }
     
     
