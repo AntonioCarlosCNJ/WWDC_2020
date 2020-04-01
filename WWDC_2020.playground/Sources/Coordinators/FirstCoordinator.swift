@@ -26,6 +26,7 @@ public class FirstCoordinator: Coordinator {
         
         self.skView.showsNodeCount = true
         self.skView.showsFPS = true
+//        self.skView.showsPhysics = true
     }
     
 }

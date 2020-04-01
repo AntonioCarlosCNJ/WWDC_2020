@@ -1,10 +1,17 @@
 import SpriteKit
 
+public protocol Observer: class {
+    
+    func decreaseAcidityLevel()
+    
+}
+
 public class Mouth {
     
     //Attributes
     private var node: SKSpriteNode
-    private var currentAcidityLevel: CGFloat = 6.8
+    
+    private var currentAcidityLevel: Double = 7.2
     
     private var _highTeeth: [Tooth] = []
     public var highTeeth: [Tooth] {
@@ -45,6 +52,7 @@ public class Mouth {
         
         for i in 1...8 {
             _highTeeth.append(Tooth(name: "highTooth\(i)", image: "teeth/high_teeth_\(i)"))
+            _highTeeth[i-1].observer = self
         }
         
         _highTeeth[0].addToothToMouth(mouthNode: self.node, position: CGPoint(x: 192, y: 193))
@@ -62,6 +70,7 @@ public class Mouth {
         
         for i in 1...8 {
             _lowTeeth.append(Tooth(name: "lowTooth\(i)", image: "teeth/low_teeth_\(i)"))
+            _lowTeeth[i-1].observer = self
         }
         
         _lowTeeth[0].addToothToMouth(mouthNode: self.node, position: CGPoint(x: 184, y: 85))
@@ -82,10 +91,21 @@ extension Mouth: GameLayerGameSceneDelegate {
     public func reproduceBacteriaInTeeth() {
         if bacteriaAmount < MAX_BACTERIA_AMOUNT {
             for i in 0..<highTeeth.count {
+                bacteriaAmount += 2
                 highTeeth[i].addBacteriumToTooth()
                 lowTeeth[i].addBacteriumToTooth()
             }
+            print("Bacteria Amount: \(bacteriaAmount)")
         }
+    }
+    
+}
+
+extension Mouth: Observer {
+    
+    public func decreaseAcidityLevel() {
+        self.currentAcidityLevel -= DECREASE_ACID_LEVEL_PER_BACTERIUM
+        print("Current acidity level = \(self.currentAcidityLevel)")
     }
     
 }

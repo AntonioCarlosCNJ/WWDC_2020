@@ -5,6 +5,8 @@ public class Tooth {
     private var node: SKSpriteNode
     private var bacteria: [SKSpriteNode] = []
     
+    public weak var observer: Observer?
+    
     public init(name: String, image: String) {
         self.node = SKSpriteNode(imageNamed: image)
         
@@ -25,6 +27,8 @@ public class Tooth {
             let bacterium = SKSpriteNode(imageNamed: "bacterium")
             bacterium.name = "bacterium"
             bacterium.position = CGPoint(x: xPosition, y: yPosition)
+            
+            observer?.decreaseAcidityLevel()
             
             bacteria.append(bacterium)
             node.addChild(bacterium)

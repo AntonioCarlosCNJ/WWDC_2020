@@ -9,13 +9,15 @@ public protocol GameLayerGameSceneDelegate: class {
 public class GameLayerGameScene: SKNode {
     
     //Attributes
-    private var currentSpeedReprodution: TimeInterval = 3.0 {
+    private var currentSpeedReprodution: TimeInterval = 0.4 {
         didSet {
             self.createActionToReproduceBacteria(speedReproduction: self.currentSpeedReprodution)
         }
     }
     
     public weak var delegate: GameLayerGameSceneDelegate?
+    
+    public var selectedNode: SKSpriteNode?
     
     //Initializers
     public init(mouth: Mouth) {
@@ -52,7 +54,19 @@ public class GameLayerGameScene: SKNode {
         
         //Add the action in the gameLayer
         self.run(repeatForeverAction, withKey: REPRODUCTION_ACTION_KEY)
-        
+    
+    }
+    
+    public func moveToothBrush(destiny: CGPoint) {
+        if let toothBrush = selectedNode {
+            toothBrush.position = destiny
+        }
+    }
+    
+    public func moveToothBrushToInitialPosition(initialPosition: CGPoint) {
+        if let toothBrush = selectedNode {
+            toothBrush.position = initialPosition
+        }
     }
     
 }

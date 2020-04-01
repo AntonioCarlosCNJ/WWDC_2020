@@ -29,7 +29,7 @@ public class GameScene: SKScene {
         let location = event.location(in: self)
         
         for clickedNode in nodes(at: location) {
-            
+//            print(clickedNode.name!)
         }
         
     }
@@ -39,16 +39,34 @@ public class GameScene: SKScene {
         
         for clickedNode in nodes(at: location) {
             
-            if clickedNode.name == "soda" {
+            if clickedNode.name == "toothBrush" {
                 
-                print("x: \(location.x), y: \(location.y)")
+                gameLayer.selectedNode = clickedNode as? SKSpriteNode
+                gameLayer.moveToothBrush(destiny: location)
                 
-                clickedNode.position.x = location.x * 1.05
-                clickedNode.position.y = location.y * 1.05
+                if let contactNode = clickedNode.children.first as? SKSpriteNode {
+                    
+//                    print("Toothbrush position: \(clickedNode.position)")
+//                    print("Contact node position: \(contactNode.position)")
+                    
+                    let bacteriaNodes = nodes(at: contactNode.position).filter { (bacterium) -> Bool in
+                        bacterium.name == "bacterium"
+                    }
+                    
+                    if !bacteriaNodes.isEmpty {
+                        print(bacteriaNodes)
+                    }
+                    
+                }
                 
+//                print("x: \(location.x), y: \(location.y)")
             }
             
         }
+    }
+    
+    public override func mouseUp(with event: NSEvent) {
+        gameLayer.moveToothBrushToInitialPosition(initialPosition: hudLayer.toothBrush.initialPosition)
     }
     
     public override func mouseMoved(with event: NSEvent) {
