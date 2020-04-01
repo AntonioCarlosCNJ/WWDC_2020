@@ -95,7 +95,7 @@ extension Mouth: GameLayerGameSceneDelegate {
                 highTeeth[i].addBacteriumToTooth()
                 lowTeeth[i].addBacteriumToTooth()
             }
-            print("Bacteria Amount: \(bacteriaAmount)")
+//            print("Bacteria Amount: \(bacteriaAmount)")
         }
     }
     
@@ -105,7 +105,7 @@ extension Mouth: Observer {
     
     public func decreaseAcidityLevel() {
         self.currentAcidityLevel -= DECREASE_ACID_LEVEL_PER_BACTERIUM
-        print("Current acidity level = \(self.currentAcidityLevel)")
+//        print("Current acidity level = \(self.currentAcidityLevel)")
     }
     
 }

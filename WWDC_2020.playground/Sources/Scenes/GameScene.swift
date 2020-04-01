@@ -49,6 +49,24 @@ public class GameScene: SKScene {
 //                    print("Toothbrush position: \(clickedNode.position)")
 //                    print("Contact node position: \(contactNode.position)")
                     
+                    for tooth in backgroundLayer.mouth.highTeeth {
+                        for bacteria in tooth.bacteria {
+                            if contactNode.intersects(bacteria) {
+                                bacteria.removeFromParent()
+                                tooth.bacteria.remove(at: tooth.bacteria.firstIndex(of: bacteria)!)
+                            }
+                        }
+                    }
+                    
+                    for tooth in backgroundLayer.mouth.lowTeeth {
+                        for bacteria in tooth.bacteria {
+                            if contactNode.intersects(bacteria) {
+                                bacteria.removeFromParent()
+                                tooth.bacteria.remove(at: tooth.bacteria.firstIndex(of: bacteria)!)
+                            }
+                        }
+                    }
+                    
                     let bacteriaNodes = nodes(at: contactNode.position).filter { (bacterium) -> Bool in
                         bacterium.name == "bacterium"
                     }

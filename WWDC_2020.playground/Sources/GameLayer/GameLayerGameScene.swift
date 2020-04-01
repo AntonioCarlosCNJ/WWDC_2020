@@ -9,7 +9,7 @@ public protocol GameLayerGameSceneDelegate: class {
 public class GameLayerGameScene: SKNode {
     
     //Attributes
-    private var currentSpeedReprodution: TimeInterval = 0.4 {
+    private var currentSpeedReprodution: TimeInterval = 0.1 {
         didSet {
             self.createActionToReproduceBacteria(speedReproduction: self.currentSpeedReprodution)
         }
