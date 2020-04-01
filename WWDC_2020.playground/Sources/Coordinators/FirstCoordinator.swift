@@ -3,18 +3,14 @@ import SpriteKit
 
 protocol Coordinator: class {
     
-    var childCoordinators: [Coordinator] { get set }
-    
     init(skView: SKView)
     
-    func  start()
+    func start()
 }
 
 public class FirstCoordinator: Coordinator {
     
     public var skView: SKView!
-    
-    var childCoordinators: [Coordinator] = []
     
     public required init(skView: SKView) {
         self.skView = skView
@@ -36,7 +32,6 @@ public class FirstCoordinator: Coordinator {
 
 extension FirstCoordinator: LaunchSceneDelegate {
     public func navigateToNextScene() {
-        
         let gameScene = GameScene(size: self.skView.frame.size)
         
         gameScene.scaleMode = .resizeFill

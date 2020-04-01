@@ -8,3 +8,4 @@ let coordinator = FirstCoordinator(skView: SKView(frame: NSRect(x: 0, y: 0, widt
 coordinator.start()
 
 PlaygroundSupport.PlaygroundPage.current.liveView = coordinator.skView
+
