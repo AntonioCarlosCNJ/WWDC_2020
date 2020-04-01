@@ -4,9 +4,6 @@ public class Mouth {
     
     //Attributes
     private var node: SKSpriteNode
-    
-    private var maxAcidityLevel: CGFloat = 7.2
-    private var minAcidityLevel: CGFloat = 4.5
     private var currentAcidityLevel: CGFloat = 6.8
     
     private var _highTeeth: [Tooth] = []

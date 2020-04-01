@@ -9,7 +9,7 @@ public protocol GameLayerGameSceneDelegate: class {
 public class GameLayerGameScene: SKNode {
     
     //Attributes
-    private var currentSpeedReprodution: CGFloat = 3.0 {
+    private var currentSpeedReprodution: TimeInterval = 3.0 {
         didSet {
             self.createActionToReproduceBacteria(speedReproduction: self.currentSpeedReprodution)
         }
@@ -32,7 +32,7 @@ public class GameLayerGameScene: SKNode {
     
     //Methods
     
-    public func createActionToReproduceBacteria(speedReproduction: TimeInterval) -> SKAction {
+    public func createActionToReproduceBacteria(speedReproduction: TimeInterval) {
         
         //Create the wait action and the reproduce action
         let waitAction = SKAction.wait(forDuration: speedReproduction)

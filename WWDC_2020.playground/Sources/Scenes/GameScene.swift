@@ -30,18 +30,6 @@ public class GameScene: SKScene {
         
         for clickedNode in nodes(at: location) {
             
-            if clickedNode.name == "soda" {
-                gameLayer.changeReproductionSpeedAndAcidityLevel(item: hudLayer.soda, mouth: backgroundLayer.mouth)
-            }
-            
-            if clickedNode.name == "sandwich" {
-                gameLayer.changeReproductionSpeedAndAcidityLevel(item: hudLayer.sandwich, mouth: backgroundLayer.mouth)
-            }
-            
-            if clickedNode.name == "toothbrush" {
-                gameLayer.changeReproductionSpeedAndAcidityLevel(item: hudLayer.toothBrush, mouth: backgroundLayer.mouth)
-            }
-            
         }
         
     }

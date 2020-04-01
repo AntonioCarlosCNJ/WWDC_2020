@@ -18,7 +18,8 @@ public class ToothBrush: Item {
     public func createNode() {
         node.name = "toothBrush"
         node.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        node.setScale(0.5)
+        node.setScale(0.15)
+        node.zPosition = zPositionOfElements.item.rawValue
     }
     
     

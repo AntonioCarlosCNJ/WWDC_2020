@@ -10,22 +10,8 @@ public class HudLayerGameScene: SKNode {
     }
     private var _sceneSize: CGSize
     
-    private var _soda: Item
-    public var soda: Item {
-        get {
-            return _soda
-        }
-    }
-    
-    private var _sandwich: Item
-    public var sandwich: Item {
-        get {
-            return _sandwich
-        }
-    }
-    
-    private var _toothBrush: Item
-    public var toothBrush: Item {
+    private var _toothBrush: ToothBrush
+    public var toothBrush: ToothBrush {
         get {
             return _toothBrush
         }
@@ -35,6 +21,7 @@ public class HudLayerGameScene: SKNode {
     public init(sceneSize: CGSize) {
         //Setting the size of the node
         self._sceneSize = sceneSize
+        self._toothBrush = ToothBrush()
         
         //Instantiating the Hud Attributes
         
@@ -50,9 +37,7 @@ public class HudLayerGameScene: SKNode {
     
     //Methods
     private func addItemsToLayer() {
-        _soda.addItemToLayer(hudLayer: self, position: CGPoint(x: sceneSize.width*0.15, y: sceneSize.height*0.25))
-        _sandwich.addItemToLayer(hudLayer: self, position: CGPoint(x: sceneSize.width*0.15, y: sceneSize.height*0.51))
-        _toothBrush.addItemToLayer(hudLayer: self, position: CGPoint(x: sceneSize.width*0.15, y: sceneSize.height*0.785))
+        _toothBrush.addNodeToHudLayer(hudLayer: self, position: CGPoint(x: sceneSize.width*0.15, y: sceneSize.height*0.785))
     }
     
     
