@@ -3,6 +3,7 @@ import SpriteKit
 public protocol Observer: class {
     
     func decreaseAcidityLevel()
+    func increaseAcidityLevel()
     
 }
 
@@ -11,7 +12,12 @@ public class Mouth {
     //Attributes
     private var node: SKSpriteNode
     
-    private var currentAcidityLevel: Double = 7.2
+    private var _currentAcidityLevel: Double = 7.2
+    public var currentAcidityLevel: Double {
+        get {
+            return self._currentAcidityLevel
+        }
+    }
     
     private var _highTeeth: [Tooth] = []
     public var highTeeth: [Tooth] {
@@ -28,6 +34,8 @@ public class Mouth {
     }
     
     public var bacteriaAmount: Int = 0
+    
+    public weak var observer: ObserverBackgroundLayer?
     
     
     //Initializers
@@ -104,8 +112,14 @@ extension Mouth: GameLayerGameSceneDelegate {
 extension Mouth: Observer {
     
     public func decreaseAcidityLevel() {
-        self.currentAcidityLevel -= DECREASE_ACID_LEVEL_PER_BACTERIUM
-//        print("Current acidity level = \(self.currentAcidityLevel)")
+        self._currentAcidityLevel -= ACID_LEVEL_PER_BACTERIUM
+        self.observer?.changepHLabelNodeAndArrow(increase: false)
+//        print("Current acidity level = \(self._currentAcidityLevel)")
+    }
+    
+    public func increaseAcidityLevel() {
+        self._currentAcidityLevel += ACID_LEVEL_PER_BACTERIUM
+        self.observer?.changepHLabelNodeAndArrow(increase: true)
     }
     
 }

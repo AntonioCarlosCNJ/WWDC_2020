@@ -33,6 +33,7 @@ public class Tooth {
             let yPosition = Int.random(in: Int(node.size.height*0.17)..<Int(node.size.height*0.83))
             
             let bacterium = SKSpriteNode(imageNamed: "bacterium")
+            bacterium.setScale(0.5)
             bacterium.name = "bacterium"
             bacterium.position = CGPoint(x: xPosition, y: yPosition)
             
@@ -41,6 +42,12 @@ public class Tooth {
             _bacteria.append(bacterium)
             node.addChild(bacterium)
         }
+    }
+    
+    public func removeBacteriaFromTooth(_ bacterium: SKSpriteNode) {
+        bacterium.removeFromParent()
+        bacteria.remove(at: bacteria.firstIndex(of: bacterium)!)
+        observer?.increaseAcidityLevel()
     }
     
     

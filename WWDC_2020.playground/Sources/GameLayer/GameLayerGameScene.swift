@@ -75,10 +75,9 @@ public class GameLayerGameScene: SKNode {
         if let contactNode = selectedNode?.children.first as? SKSpriteNode {
             
             for tooth in mouth.highTeeth {
-                for bacteria in tooth.bacteria {
-                    if contactNode.intersects(bacteria) {
-                        bacteria.removeFromParent()
-                        tooth.bacteria.remove(at: tooth.bacteria.firstIndex(of: bacteria)!)
+                for bacterium in tooth.bacteria {
+                    if contactNode.intersects(bacterium) {
+                        tooth.removeBacteriaFromTooth(bacterium)
                         mouth.bacteriaAmount -= 1
                         if currentSpeedReprodution < MAX_REPRODUCTION_SPEED {
                             currentSpeedReprodution += INCREASE_SPEED_REPRODUCTION_PER_BACTERIUM
@@ -88,10 +87,9 @@ public class GameLayerGameScene: SKNode {
             }
             
             for tooth in mouth.lowTeeth {
-                for bacteria in tooth.bacteria {
-                    if contactNode.intersects(bacteria) {
-                        bacteria.removeFromParent()
-                        tooth.bacteria.remove(at: tooth.bacteria.firstIndex(of: bacteria)!)
+                for bacterium in tooth.bacteria {
+                    if contactNode.intersects(bacterium) {
+                        tooth.removeBacteriaFromTooth(bacterium)
                         mouth.bacteriaAmount -= 1
                         if currentSpeedReprodution < MAX_REPRODUCTION_SPEED {
                             currentSpeedReprodution += INCREASE_SPEED_REPRODUCTION_PER_BACTERIUM

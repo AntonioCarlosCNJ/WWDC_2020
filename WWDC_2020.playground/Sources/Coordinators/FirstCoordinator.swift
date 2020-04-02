@@ -17,6 +17,8 @@ public class FirstCoordinator: Coordinator {
     }
     
     public func start() {
+        registerCustomFonts()
+        
         let launchScene = LaunchScene(size: self.skView.frame.size)
         
         launchScene.launchSceneDelegate = self
@@ -27,6 +29,13 @@ public class FirstCoordinator: Coordinator {
         self.skView.showsNodeCount = true
         self.skView.showsFPS = true
 //        self.skView.showsPhysics = true
+    }
+    
+    private func registerCustomFonts() {
+        
+        let cfURL = Bundle.main.url(forResource: "Fonts/Hey_October", withExtension: ".ttf")! as CFURL
+        CTFontManagerRegisterFontsForURL(cfURL, .process, nil)
+        
     }
     
 }

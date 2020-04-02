@@ -1,5 +1,11 @@
 import SpriteKit
 
+public protocol ObserverBackgroundLayer: class {
+    
+    func changepHLabelNodeAndArrow(increase: Bool)
+    
+}
+
 public class BackgroundLayerGameScene: SKNode {
      
     //Attributes
@@ -20,12 +26,17 @@ public class BackgroundLayerGameScene: SKNode {
     }
     
     private var chemicalReaction = SKSpriteNode(imageNamed: "chemistry/chemical_reaction")
-    
     private var directArrow = SKSpriteNode(imageNamed: "chemistry/direct")
     private var reverseArrow = SKSpriteNode(imageNamed: "chemistry/reverse")
     
+    private var pHTitleNode = SKSpriteNode(imageNamed: "pH")
+    private var upArrow = SKSpriteNode(imageNamed: "up_arrow")
+    private var downArrow = SKSpriteNode(imageNamed: "down_arrow")
+    private var phLabelNode = SKLabelNode()
+    
     //Initializers
     public init(sceneSize: CGSize) {
+        
         //Set the size of the node
         self.sceneSize = sceneSize
         
@@ -36,16 +47,15 @@ public class BackgroundLayerGameScene: SKNode {
         let mouthTexture = SKTexture(imageNamed: "mouth/mouth")
         self._mouth = Mouth(texture: mouthTexture)
         
-        super.init()
         
-//         self.setScale(0.5)
+        super.init()
         
         //Set the backgroundNodes
         self.addBackgroundColor()
         self.addBoardDesk()
         
         
-        
+        self._mouth.observer = self
         self._mouth.addMouthToLayer(backgroundLayer: self,
                                    position: CGPoint(x: boardDesk.position.x + ((boardDesk.size.width - mouthTexture.size().width)/2),
                                                      y: sceneSize.height*0.12))
@@ -57,6 +67,11 @@ public class BackgroundLayerGameScene: SKNode {
         self.addChemicalReaction()
         self.addDirectArrow()
         self.addReverseArrow()
+        
+        self.addPhtitleNode()
+        self.addUpArrow()
+        self.addDownArrow()
+        self.addPhLabelNode()
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -131,6 +146,64 @@ public class BackgroundLayerGameScene: SKNode {
         reverseArrow.name = "reverseArrow"
         
         chemicalReaction.addChild(reverseArrow)
+    }
+    
+    public func addPhtitleNode() {
+        pHTitleNode.anchorPoint = CGPoint(x: 0, y: 0)
+        pHTitleNode.position = CGPoint(x: boardDesk.position.x + boardDesk.size.width * 0.815,
+                                       y: boardDesk.position.y + boardDesk.size.height * 0.52)
+        pHTitleNode.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        pHTitleNode.name = "pHTitleNode"
+        
+        self.addChild(pHTitleNode)
+    }
+    
+    public func addUpArrow() {
+        upArrow.anchorPoint = CGPoint(x: 0, y: 0)
+        upArrow.position = CGPoint(x: pHTitleNode.position.x + (pHTitleNode.position.x*0.05),
+                                   y: pHTitleNode.position.y*0.82)
+        upArrow.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        upArrow.name = "upArrow"
+        
+        self.addChild(upArrow)
+    }
+    
+    public func addDownArrow() {
+        downArrow.anchorPoint = CGPoint(x: 0, y: 0)
+        downArrow.position = CGPoint(x: pHTitleNode.position.x + (pHTitleNode.position.x*0.05),
+                                   y: pHTitleNode.position.y*0.82)
+        downArrow.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        downArrow.name = "downArrow"
+        
+        self.addChild(downArrow)
+    }
+    public func addPhLabelNode() {
+        phLabelNode.text = "\(mouth.currentAcidityLevel)"
+        phLabelNode.fontName = "Hey October"
+        phLabelNode.position = CGPoint(x: pHTitleNode.position.x + (pHTitleNode.position.x*0.01),
+                                       y: pHTitleNode.position.y*0.82)
+        phLabelNode.fontSize = 26
+        phLabelNode.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        
+        self.addChild(phLabelNode)
+    }
+    
+}
+
+extension BackgroundLayerGameScene: ObserverBackgroundLayer {
+    
+    public func changepHLabelNodeAndArrow(increase: Bool) {
+        
+        if increase {
+            downArrow.isHidden = true
+            upArrow.isHidden = false
+        } else {
+            downArrow.isHidden = false
+            upArrow.isHidden = true
+        }
+        
+        self.phLabelNode.text = "\(round(self.mouth.currentAcidityLevel*10)/10)"
+        
     }
     
 }
