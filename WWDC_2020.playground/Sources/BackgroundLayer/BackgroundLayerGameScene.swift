@@ -6,10 +6,18 @@ public protocol ObserverBackgroundLayer: class {
     
 }
 
+public protocol BackgroundLayerDelegate: class {
+    
+    func logicToMakeChangeOfAcidityLevel(_ backgroundLayer: BackgroundLayerGameScene, didIncrease increase: Bool)
+    
+}
+
 public class BackgroundLayerGameScene: SKNode {
      
     //Attributes
     private var sceneSize: CGSize
+    
+    public weak var delegate: BackgroundLayerDelegate?
     
     private var backgroundColor: SKSpriteNode
     private var boardDesk = SKSpriteNode(imageNamed: "background/board_desk")
@@ -30,9 +38,19 @@ public class BackgroundLayerGameScene: SKNode {
     private var reverseArrow = SKSpriteNode(imageNamed: "chemistry/reverse")
     
     private var pHTitleNode = SKSpriteNode(imageNamed: "pH")
-    private var upArrow = SKSpriteNode(imageNamed: "up_arrow")
-    private var downArrow = SKSpriteNode(imageNamed: "down_arrow")
-    private var phLabelNode = SKLabelNode()
+    private var _upArrow = SKSpriteNode(imageNamed: "up_arrow")
+    public var upArrow: SKSpriteNode {
+        get {
+            return self._upArrow
+        }
+    }
+    private var _downArrow = SKSpriteNode(imageNamed: "down_arrow")
+    public var downArrow: SKSpriteNode {
+        get {
+            return self._downArrow
+        }
+    }
+    public var phLabelNode = SKLabelNode()
     
     //Initializers
     public init(sceneSize: CGSize) {
@@ -159,23 +177,24 @@ public class BackgroundLayerGameScene: SKNode {
     }
     
     public func addUpArrow() {
-        upArrow.anchorPoint = CGPoint(x: 0, y: 0)
-        upArrow.position = CGPoint(x: pHTitleNode.position.x + (pHTitleNode.position.x*0.05),
+        _upArrow.anchorPoint = CGPoint(x: 0, y: 0)
+        _upArrow.position = CGPoint(x: pHTitleNode.position.x + (pHTitleNode.position.x*0.05),
                                    y: pHTitleNode.position.y*0.82)
-        upArrow.zPosition = zPositionOfElements.chemicalReaction.rawValue
-        upArrow.name = "upArrow"
+        _upArrow.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        _upArrow.name = "upArrow"
+        _upArrow.isHidden = true
         
-        self.addChild(upArrow)
+        self.addChild(_upArrow)
     }
     
     public func addDownArrow() {
-        downArrow.anchorPoint = CGPoint(x: 0, y: 0)
-        downArrow.position = CGPoint(x: pHTitleNode.position.x + (pHTitleNode.position.x*0.05),
+        _downArrow.anchorPoint = CGPoint(x: 0, y: 0)
+        _downArrow.position = CGPoint(x: pHTitleNode.position.x + (pHTitleNode.position.x*0.05),
                                    y: pHTitleNode.position.y*0.82)
-        downArrow.zPosition = zPositionOfElements.chemicalReaction.rawValue
-        downArrow.name = "downArrow"
+        _downArrow.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        _downArrow.name = "downArrow"
         
-        self.addChild(downArrow)
+        self.addChild(_downArrow)
     }
     public func addPhLabelNode() {
         phLabelNode.text = "\(mouth.currentAcidityLevel)"
@@ -194,15 +213,7 @@ extension BackgroundLayerGameScene: ObserverBackgroundLayer {
     
     public func changepHLabelNodeAndArrow(increase: Bool) {
         
-        if increase {
-            downArrow.isHidden = true
-            upArrow.isHidden = false
-        } else {
-            downArrow.isHidden = false
-            upArrow.isHidden = true
-        }
-        
-        self.phLabelNode.text = "\(round(self.mouth.currentAcidityLevel*10)/10)"
+        self.delegate?.logicToMakeChangeOfAcidityLevel(self, didIncrease: increase)
         
     }
     
