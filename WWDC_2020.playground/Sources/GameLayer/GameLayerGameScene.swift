@@ -9,9 +9,10 @@ public protocol GameLayerGameSceneDelegate: class {
 public class GameLayerGameScene: SKNode {
     
     //Attributes
-    private var currentSpeedReprodution: TimeInterval = 0.1 {
+    private var currentSpeedReprodution: TimeInterval = MIN_REPRODUCTION_SPEED {
         didSet {
             self.createActionToReproduceBacteria(speedReproduction: self.currentSpeedReprodution)
+            print(self.currentSpeedReprodution)
         }
     }
     
@@ -66,6 +67,39 @@ public class GameLayerGameScene: SKNode {
     public func moveToothBrushToInitialPosition(initialPosition: CGPoint) {
         if let toothBrush = selectedNode {
             toothBrush.position = initialPosition
+        }
+    }
+    
+    public func cleanTeeth(mouth: Mouth) {
+        
+        if let contactNode = selectedNode?.children.first as? SKSpriteNode {
+            
+            for tooth in mouth.highTeeth {
+                for bacteria in tooth.bacteria {
+                    if contactNode.intersects(bacteria) {
+                        bacteria.removeFromParent()
+                        tooth.bacteria.remove(at: tooth.bacteria.firstIndex(of: bacteria)!)
+                        mouth.bacteriaAmount -= 1
+                        if currentSpeedReprodution < MAX_REPRODUCTION_SPEED {
+                            currentSpeedReprodution += INCREASE_SPEED_REPRODUCTION_PER_BACTERIUM
+                        }
+                    }
+                }
+            }
+            
+            for tooth in mouth.lowTeeth {
+                for bacteria in tooth.bacteria {
+                    if contactNode.intersects(bacteria) {
+                        bacteria.removeFromParent()
+                        tooth.bacteria.remove(at: tooth.bacteria.firstIndex(of: bacteria)!)
+                        mouth.bacteriaAmount -= 1
+                        if currentSpeedReprodution < MAX_REPRODUCTION_SPEED {
+                            currentSpeedReprodution += INCREASE_SPEED_REPRODUCTION_PER_BACTERIUM
+                        }
+                    }
+                }
+            }
+            
         }
     }
     

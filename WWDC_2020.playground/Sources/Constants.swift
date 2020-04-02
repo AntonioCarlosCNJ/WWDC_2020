@@ -18,13 +18,15 @@ public enum zPositionOfElements: CGFloat {
 /** minReproductionSpeed: inverse of maxReproductionSpeed*/
 
 public let MAX_REPRODUCTION_SPEED: Double = 4.0
-public let MIN_REPRODUCTION_SPEED: Double = 1.0
+public let MIN_REPRODUCTION_SPEED: Double = 0.5
 
 public let MAX_ACIDITY_LEVEL: Double = 7.2
 public let MIN_ACIDITY_LEVEL: Double = 4.5
 
 public let MAX_BACTERIA_AMOUNT: Int = 1600
 public let MAX_BACTERIA_AMOUNT_PER_TOOTH: Int = 100
+
+public let INCREASE_SPEED_REPRODUCTION_PER_BACTERIUM: Double = (MAX_REPRODUCTION_SPEED - MIN_REPRODUCTION_SPEED) / Double(MAX_BACTERIA_AMOUNT)
 
 public let DECREASE_ACID_LEVEL_PER_BACTERIUM: Double = (MAX_ACIDITY_LEVEL - MIN_ACIDITY_LEVEL) / Double(MAX_BACTERIA_AMOUNT)
 

@@ -38,9 +38,13 @@ public class BackgroundLayerGameScene: SKNode {
         
         super.init()
         
+//         self.setScale(0.5)
+        
         //Set the backgroundNodes
         self.addBackgroundColor()
         self.addBoardDesk()
+        
+        
         
         self._mouth.addMouthToLayer(backgroundLayer: self,
                                    position: CGPoint(x: boardDesk.position.x + ((boardDesk.size.width - mouthTexture.size().width)/2),

@@ -26,11 +26,11 @@ public class GameScene: SKScene {
     
     public override func mouseDown(with event: NSEvent) {
         
-        let location = event.location(in: self)
-        
-        for clickedNode in nodes(at: location) {
+//        let location = event.location(in: self)
+//
+//        for clickedNode in nodes(at: location) {
 //            print(clickedNode.name!)
-        }
+//        }
         
     }
     
@@ -43,41 +43,8 @@ public class GameScene: SKScene {
                 
                 gameLayer.selectedNode = clickedNode as? SKSpriteNode
                 gameLayer.moveToothBrush(destiny: location)
+                gameLayer.cleanTeeth(mouth: backgroundLayer.mouth)
                 
-                if let contactNode = clickedNode.children.first as? SKSpriteNode {
-                    
-//                    print("Toothbrush position: \(clickedNode.position)")
-//                    print("Contact node position: \(contactNode.position)")
-                    
-                    for tooth in backgroundLayer.mouth.highTeeth {
-                        for bacteria in tooth.bacteria {
-                            if contactNode.intersects(bacteria) {
-                                bacteria.removeFromParent()
-                                tooth.bacteria.remove(at: tooth.bacteria.firstIndex(of: bacteria)!)
-                            }
-                        }
-                    }
-                    
-                    for tooth in backgroundLayer.mouth.lowTeeth {
-                        for bacteria in tooth.bacteria {
-                            if contactNode.intersects(bacteria) {
-                                bacteria.removeFromParent()
-                                tooth.bacteria.remove(at: tooth.bacteria.firstIndex(of: bacteria)!)
-                            }
-                        }
-                    }
-                    
-                    let bacteriaNodes = nodes(at: contactNode.position).filter { (bacterium) -> Bool in
-                        bacterium.name == "bacterium"
-                    }
-                    
-                    if !bacteriaNodes.isEmpty {
-                        print(bacteriaNodes)
-                    }
-                    
-                }
-                
-//                print("x: \(location.x), y: \(location.y)")
             }
             
         }
@@ -85,10 +52,6 @@ public class GameScene: SKScene {
     
     public override func mouseUp(with event: NSEvent) {
         gameLayer.moveToothBrushToInitialPosition(initialPosition: hudLayer.toothBrush.initialPosition)
-    }
-    
-    public override func mouseMoved(with event: NSEvent) {
-        
     }
     
     public override func update(_ currentTime: TimeInterval) {

@@ -5,15 +5,13 @@ public class ToothBrush: Item {
     // Attributes
     public var node: SKSpriteNode = SKSpriteNode(imageNamed: "interactable_items/toothbrush")
     public var contactNode: SKSpriteNode = SKSpriteNode(imageNamed: "interactable_items/contactNode")
-    public var speedReproduction: TimeInterval
+    public var speedReproduction: TimeInterval?
     
     public var initialPosition: CGPoint = .zero
     
     
     // Initializers
     public init() {
-        self.speedReproduction = 0.4
-        
         self.createNode()
         self.createAndAddContactNodeToToothBrush()
     }
