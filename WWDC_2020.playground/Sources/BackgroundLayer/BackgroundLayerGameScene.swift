@@ -1,15 +1,13 @@
 import SpriteKit
 
 public protocol ObserverBackgroundLayer: class {
-    
-    func changepHLabelNodeAndArrow(increase: Bool)
-    
+    func didChangeAcidityLevel(increase: Bool)
+    func didChangeBacteryLevel(decrease: Bool)
 }
 
 public protocol BackgroundLayerDelegate: class {
-    
     func logicToMakeChangeOfAcidityLevel(_ backgroundLayer: BackgroundLayerGameScene, didIncrease increase: Bool)
-    
+    func logicToChangeColorsOfChemicalReaction(_ backgroundLayer: BackgroundLayerGameScene, didDecrease decrease: Bool)
 }
 
 public class BackgroundLayerGameScene: SKNode {
@@ -33,18 +31,54 @@ public class BackgroundLayerGameScene: SKNode {
         }
     }
     
-    private var chemicalReaction = SKSpriteNode(imageNamed: "chemistry/chemical_reaction")
-    private var directArrow = SKSpriteNode(imageNamed: "chemistry/direct")
-    private var reverseArrow = SKSpriteNode(imageNamed: "chemistry/reverse")
+    private var _reagent = SKSpriteNode(imageNamed: "Main_Reaction/reagent")
+    public var reagent: SKSpriteNode {
+        get {
+            return _reagent
+        }
+    }
+    private var _reagentFull = SKSpriteNode(imageNamed: "Main_Reaction/reagent_full")
+    public var reagentFull: SKSpriteNode {
+        get {
+            return _reagentFull
+        }
+    }
     
-    private var pHTitleNode = SKSpriteNode(imageNamed: "pH")
-    private var _upArrow = SKSpriteNode(imageNamed: "up_arrow")
+    private var _directArrow = SKSpriteNode(imageNamed: "Main_Reaction/direct")
+    public var directArrow: SKSpriteNode {
+        get {
+            return _directArrow
+        }
+    }
+    
+    private var _reverseArrow = SKSpriteNode(imageNamed: "Main_Reaction/reverse")
+    public var reverseArrow: SKSpriteNode {
+        get {
+            return _reverseArrow
+        }
+    }
+    
+    private var _product = SKSpriteNode(imageNamed: "Main_Reaction/product")
+    public var product: SKSpriteNode {
+        get {
+            return _product
+        }
+    }
+    private var _productFull = SKSpriteNode(imageNamed: "Main_Reaction/product_full")
+    public var productFull: SKSpriteNode {
+        get {
+            return _productFull
+        }
+    }
+    
+    private var pHTitleNode = SKSpriteNode(imageNamed: "chemistry/pH")
+    private var _upArrow = SKSpriteNode(imageNamed: "chemistry/up_arrow")
     public var upArrow: SKSpriteNode {
         get {
             return self._upArrow
         }
     }
-    private var _downArrow = SKSpriteNode(imageNamed: "down_arrow")
+    private var _downArrow = SKSpriteNode(imageNamed: "chemistry/down_arrow")
     public var downArrow: SKSpriteNode {
         get {
             return self._downArrow
@@ -62,6 +96,7 @@ public class BackgroundLayerGameScene: SKNode {
         backgroundColor = SKSpriteNode(color: NSColor(calibratedRed: 137/255, green: 164/255, blue: 170/255,
                                                       alpha: 1.0), size: sceneSize)
         
+        //Set the mouth texture and instantiate mouth before the super.init()
         let mouthTexture = SKTexture(imageNamed: "mouth/mouth")
         self._mouth = Mouth(texture: mouthTexture)
         
@@ -72,20 +107,26 @@ public class BackgroundLayerGameScene: SKNode {
         self.addBackgroundColor()
         self.addBoardDesk()
         
-        
+        //Set the mouth observer and add mouth to layer
         self._mouth.observer = self
         self._mouth.addMouthToLayer(backgroundLayer: self,
-                                   position: CGPoint(x: boardDesk.position.x + ((boardDesk.size.width - mouthTexture.size().width)/2),
+                                    position: CGPoint(x: boardDesk.position.x + ((boardDesk.size.width - mouthTexture.size().width)/2),
                                                      y: sceneSize.height*0.12))
         
+        //Add shelfs to layer
         self.addShelf1()
         self.addShelf2()
         self.addShelf3()
         
-        self.addChemicalReaction()
-        self.addDirectArrow()
+        //Add the nodes for main reaction
+        self.addReagent()
+        self.addReagentFull()
         self.addReverseArrow()
+        self.addDirectArrow()
+        self.addProduct()
+        self.addProductFull()
         
+        //Add the nodes to show acidity level(pH)
         self.addPhtitleNode()
         self.addUpArrow()
         self.addDownArrow()
@@ -138,32 +179,75 @@ public class BackgroundLayerGameScene: SKNode {
         addChild(shelf3)
     }
     
-    private func addChemicalReaction() {
-        chemicalReaction.anchorPoint = CGPoint(x: 0, y: 0)
-        chemicalReaction.setScale(0.5)
-        chemicalReaction.position = CGPoint(x: boardDesk.frame.minX + ((boardDesk.size.width - chemicalReaction.size.width)/2), y: 394)
-        chemicalReaction.zPosition = zPositionOfElements.chemicalReaction.rawValue
-        chemicalReaction.name = "chemicalReaction"
+    private func addReagent() {
+        _reagent.anchorPoint = .zero
+        _reagent.position = CGPoint(x: boardDesk.position.x + boardDesk.size.width*0.06, y: boardDesk.position.y + boardDesk.size.height * 0.88)
+        _reagent.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        _reagent.name = "reagent"
         
-        self.addChild(chemicalReaction)
+        /**
+            Set alpha .zero because the reagent are full, so only
+            the reagent full has to apear
+        */
+        _reagent.alpha = .zero
+        
+        self.addChild(_reagent)
     }
     
-    private func addDirectArrow() {
-        directArrow.anchorPoint = CGPoint(x: 0, y: 0)
-        directArrow.position = CGPoint(x: chemicalReaction.frame.width*0.63, y: chemicalReaction.frame.height * 1.15)
-        directArrow.zPosition = zPositionOfElements.arrows.rawValue
-        directArrow.name = "directArrow"
+    private func addReagentFull() {
+        _reagentFull.anchorPoint = _reagent.anchorPoint
+        _reagentFull.position = _reagent.position
+        _reagentFull.zPosition = _reagent.zPosition
+        _reagentFull.name = "reagentFull"
         
-        chemicalReaction.addChild(directArrow)
+        _reagentFull.alpha = 1.0
+        
+        self.addChild(_reagentFull)
     }
     
     private func addReverseArrow() {
-        reverseArrow.anchorPoint = CGPoint(x: 0, y: 0)
-        reverseArrow.position = CGPoint(x: chemicalReaction.frame.width*0.63, y: chemicalReaction.frame.height * 0.65)
-        reverseArrow.zPosition = zPositionOfElements.arrows.rawValue
-        reverseArrow.name = "reverseArrow"
+        _reverseArrow.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        _reverseArrow.setScale(0.5)
+        _reverseArrow.position = CGPoint(x:  _reagent.size.width + _reagent.position.x*1.1, y: _reagent.position.y*1.045)
+        _reverseArrow.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        _reverseArrow.name = "reverseArrow"
         
-        chemicalReaction.addChild(reverseArrow)
+        self.addChild(_reverseArrow)
+    }
+    
+    private func addDirectArrow() {
+        _directArrow.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        _directArrow.setScale(0.5)
+        _directArrow.position = CGPoint(x: _reverseArrow.position.x, y: _reagent.position.y*1.075)
+        _directArrow.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        _directArrow.name = "directArrow"
+        
+        self.addChild(_directArrow)
+    }
+    
+    private func addProduct() {
+        _product.anchorPoint = .zero
+        _product.position = CGPoint(x: _reverseArrow.size.width + _reverseArrow.position.x, y: _reagent.position.y*1.005)
+        _product.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        _product.name = "product"
+        
+        _product.alpha = 1.0
+        
+        self.addChild(_product)
+    }
+    private func addProductFull() {
+        _productFull.anchorPoint = _product.anchorPoint
+        _productFull.position = _product.position
+        _productFull.zPosition = _product.zPosition
+        _productFull.name = "productFull"
+        
+        /**
+            Set alpha .zero because the reagent are full, so only
+            the product has to apear
+        */
+        _productFull.alpha = .zero
+        
+        self.addChild(_productFull)
     }
     
     public func addPhtitleNode() {
@@ -211,10 +295,12 @@ public class BackgroundLayerGameScene: SKNode {
 
 extension BackgroundLayerGameScene: ObserverBackgroundLayer {
     
-    public func changepHLabelNodeAndArrow(increase: Bool) {
-        
+    public func didChangeAcidityLevel(increase: Bool) {
         self.delegate?.logicToMakeChangeOfAcidityLevel(self, didIncrease: increase)
-        
+    }
+    
+    public func didChangeBacteryLevel(decrease: Bool) {
+        self.delegate?.logicToChangeColorsOfChemicalReaction(self, didDecrease: decrease)
     }
     
 }

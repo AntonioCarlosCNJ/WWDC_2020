@@ -38,7 +38,21 @@ public class Mouth {
         }
     }
     
-    public var bacteriaAmount: Int = 0
+    public var bacteriaAmount: Int = 0 {
+        willSet{
+            
+            if newValue > bacteriaAmount && _currentAcidityLevel < MIN_GOOD_ACIDITY_LEVEL {
+                
+                observer?.didChangeBacteryLevel(decrease: false)
+                
+            } else {
+                
+                observer?.didChangeBacteryLevel(decrease: true)
+                
+            }
+            
+        }
+    }
     
     public weak var observer: ObserverBackgroundLayer?
     
@@ -104,9 +118,13 @@ extension Mouth: GameLayerGameSceneDelegate {
     public func reproduceBacteriaInTeeth() {
         if bacteriaAmount < MAX_BACTERIA_AMOUNT {
             for i in 0..<highTeeth.count {
-                bacteriaAmount += 2
-                highTeeth[i].addBacteriumToTooth()
-                lowTeeth[i].addBacteriumToTooth()
+                highTeeth[i].addBacteriumToTooth { () in
+                    bacteriaAmount += 1
+                }
+                lowTeeth[i].addBacteriumToTooth { () in
+                    bacteriaAmount += 1
+                }
+//                self.observer?.didChangeBacteryLevel(increase: true)
             }
 //            print("Bacteria Amount: \(bacteriaAmount)")
         }
@@ -118,13 +136,13 @@ extension Mouth: Observer {
     
     public func decreaseAcidityLevel() {
         self._currentAcidityLevel -= ACID_LEVEL_PER_BACTERIUM
-        self.observer?.changepHLabelNodeAndArrow(increase: false)
+        self.observer?.didChangeAcidityLevel(increase: false)
 //        print("Current acidity level = \(self._currentAcidityLevel)")
     }
     
     public func increaseAcidityLevel() {
         self._currentAcidityLevel += ACID_LEVEL_PER_BACTERIUM
-        self.observer?.changepHLabelNodeAndArrow(increase: true)
+        self.observer?.didChangeAcidityLevel(increase: true)
     }
     
 }

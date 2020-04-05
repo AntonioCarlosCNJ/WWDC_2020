@@ -33,12 +33,12 @@ public class Tooth {
         mouthNode.addChild(self._node)
     }
     
-    public func addBacteriumToTooth() {
+    public func addBacteriumToTooth(completion: () -> Void) {
         if _bacteria.count < MAX_BACTERIA_AMOUNT_PER_TOOTH {
             let xPosition = Int.random(in: Int(_node.size.width*0.18)..<Int(_node.size.width*0.85))
             let yPosition = Int.random(in: Int(_node.size.height*0.17)..<Int(_node.size.height*0.83))
             
-            let bacterium = SKSpriteNode(imageNamed: "bacterium")
+            let bacterium = SKSpriteNode(imageNamed: "chemistry/bacterium")
             bacterium.setScale(0.5)
             bacterium.name = "bacterium"
             bacterium.position = CGPoint(x: xPosition, y: yPosition)
@@ -47,6 +47,8 @@ public class Tooth {
             
             _bacteria.append(bacterium)
             _node.addChild(bacterium)
+            
+            completion()
         }
     }
     

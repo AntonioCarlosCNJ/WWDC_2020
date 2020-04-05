@@ -33,9 +33,11 @@ public class GameScene: SKScene {
 
         for clickedNode in nodes(at: location) {
             if clickedNode.name == "soda" {
-                
-                gameLayer.duplicateSodaNode(sodaNode: clickedNode as! SKSpriteNode)
-                
+                gameLayer.duplicateItemNode(itemNode: clickedNode as! SKSpriteNode, name: "sodaSelected")
+            }
+            
+            if clickedNode.name == "sandwich" {
+                gameLayer.duplicateItemNode(itemNode: clickedNode as! SKSpriteNode, name: "sandwichSelected")
             }
         }
         
@@ -47,17 +49,17 @@ public class GameScene: SKScene {
         for clickedNode in nodes(at: location) {
             
             if clickedNode.name == "toothBrush" {
-                
                 gameLayer.selectedNode = clickedNode as? SKSpriteNode
-                gameLayer.moveToothBrush(destiny: location)
+                gameLayer.moveItemNode(destiny: location)
                 gameLayer.cleanTeeth(mouth: backgroundLayer.mouth)
-                
             }
             
             if clickedNode.name == "sodaSelected" {
-                
-                gameLayer.moveSodaNode(destiny: location)
-                
+                gameLayer.moveItemNode(destiny: location)
+            }
+            
+            if clickedNode.name == "sandwichSelected" {
+                gameLayer.moveItemNode(destiny: location)
             }
             
         }
@@ -68,15 +70,11 @@ public class GameScene: SKScene {
             gameLayer.moveToothBrushToInitialPosition(initialPosition: hudLayer.toothBrush.initialPosition)
         }
         if gameLayer.selectedNode?.name == "sodaSelected" {
-            gameLayer.dropSodaNodeIntoMouth(mouth: backgroundLayer.mouth, soda: hudLayer.soda)
+            gameLayer.dropItemNodeIntoMouth(mouth: backgroundLayer.mouth, item: hudLayer.soda)
         }
-        
-        
-    }
-    
-    public override func update(_ currentTime: TimeInterval) {
-        
-        
+        if gameLayer.selectedNode?.name == "sandwichSelected" {
+            gameLayer.dropItemNodeIntoMouth(mouth: backgroundLayer.mouth, item: hudLayer.sandwich)
+        }
     }
     
 }
