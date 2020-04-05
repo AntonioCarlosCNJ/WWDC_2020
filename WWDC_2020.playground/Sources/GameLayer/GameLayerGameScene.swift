@@ -20,6 +20,8 @@ public class GameLayerGameScene: SKNode {
     
     public var selectedNode: SKSpriteNode?
     
+    public var clonedLogNode: SKSpriteNode?
+    
     //Initializers
     public override init() {
         super.init()
@@ -162,10 +164,86 @@ public class GameLayerGameScene: SKNode {
         }
     }
     
+    private func cloneSKSpriteNode(node: SKSpriteNode) -> SKSpriteNode {
+        let retNode = SKSpriteNode(texture: node.texture)
+        retNode.anchorPoint = node.anchorPoint
+        retNode.position = node.position
+        retNode.name = node.name! + "cloned"
+        retNode.zPosition = node.zPosition
+        
+        if let parent = node.parent {
+            parent.addChild(retNode)
+        }
+        
+        return retNode
+    }
+    
+    private func createActionToChemicalLog(node: SKSpriteNode, duration: TimeInterval) -> SKAction{
+        let moveAction = SKAction.moveTo(y: node.position.y*1.2, duration: duration)
+        let alphaAction = SKAction.fadeAlpha(to: 0.0, duration: duration)
+        let removeAction = SKAction.run {
+            node.removeFromParent()
+        }
+        
+        let group = SKAction.group([moveAction,alphaAction])
+        
+        let sequence = SKAction.sequence([group, removeAction])
+        
+        return sequence
+    }
+    
 }
 
 extension GameLayerGameScene: BackgroundLayerDelegate {
     
+    public func logicToShowChemicalLog(_ backgroundLayer: BackgroundLayerGameScene, chemicalLog: ChemicalLog, didIncreaseAcidityLevel increase: Bool) {
+        
+        if increase && self.clonedLogNode?.action(forKey: "decreaseLog") != nil{
+            clonedLogNode?.removeAllActions()
+            clonedLogNode?.removeFromParent()
+            
+            self.clonedLogNode = cloneSKSpriteNode(node: chemicalLog.reagent)
+            let initialYPosition = self.clonedLogNode!.position.y
+            let duration = MIN_GOOD_ACIDITY_LEVEL / 8.0
+            
+            let moveAction = SKAction.moveTo(y: self.clonedLogNode!.position.y*1.4, duration: duration)
+            let alphaAction = SKAction.fadeAlpha(to: .zero, duration: duration)
+            
+            let moveFadeAction = SKAction.group([moveAction, alphaAction])
+            let moveBackAction = SKAction.moveTo(y: initialYPosition, duration: 0.0)
+            let alphaToOneAction = SKAction.fadeAlpha(to: 1.0, duration: 0.0)
+            
+            let sequence = SKAction.sequence([moveFadeAction, moveBackAction, alphaToOneAction])
+            
+            self.clonedLogNode!.run(SKAction.repeatForever(sequence), withKey: "increaseLog")
+            
+        } else if backgroundLayer.mouth.currentAcidityLevel < MIN_GOOD_ACIDITY_LEVEL && (self.clonedLogNode?.action(forKey: "increaseLog") != nil || self.clonedLogNode == nil) && self.selectedNode == nil{
+            clonedLogNode?.removeAllActions()
+            clonedLogNode?.removeFromParent()
+            
+            let textures = [chemicalLog.productOne.texture, chemicalLog.productTwo.texture, chemicalLog.productThree.texture]
+            
+            self.clonedLogNode = cloneSKSpriteNode(node: chemicalLog.productOne)
+            let initialYPosition = self.clonedLogNode!.position.y
+            
+            let duration = MIN_GOOD_ACIDITY_LEVEL / 8.0
+            
+            let moveAction = SKAction.moveTo(y: self.clonedLogNode!.position.y*1.4, duration: duration)
+            let alphaAction = SKAction.fadeAlpha(to: .zero, duration: duration)
+            
+            let moveFadeAction = SKAction.group([moveAction, alphaAction])
+            
+            let moveBackAction = SKAction.moveTo(y: initialYPosition, duration: 0.0)
+            let alphaToOneAction = SKAction.fadeAlpha(to: 1.0, duration: 0.0)
+            
+            let sequence = SKAction.sequence([moveFadeAction, moveBackAction, SKAction.setTexture(textures[1]!), alphaToOneAction,
+                                              moveFadeAction, moveBackAction, SKAction.setTexture(textures[2]!), alphaToOneAction,
+                                              moveFadeAction, moveBackAction, SKAction.setTexture(textures[0]!), alphaToOneAction])
+            
+            self.clonedLogNode!.run(SKAction.repeatForever(sequence), withKey: "decreaseLog")
+        }
+        
+    }
     
     public func logicToMakeChangeOfAcidityLevel(_ backgroundLayer: BackgroundLayerGameScene, didIncrease increase: Bool) {
         if increase {
@@ -199,11 +277,6 @@ extension GameLayerGameScene: BackgroundLayerDelegate {
             
             backgroundLayer.reagentFull.alpha -= REAGENT_ALPHA_PER_BACTERIUM
             backgroundLayer.reagent.alpha += REAGENT_ALPHA_PER_BACTERIUM
-            
-            print("Product Full: \(backgroundLayer.productFull.alpha)")
-            print("Product: \(backgroundLayer.product.alpha)")
-            print("Reagent Full: \(backgroundLayer.reagentFull.alpha)")
-            print("Reagent: \(backgroundLayer.reagent.alpha)")
             
         }
     }

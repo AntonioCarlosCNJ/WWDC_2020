@@ -8,6 +8,7 @@ public protocol ObserverBackgroundLayer: class {
 public protocol BackgroundLayerDelegate: class {
     func logicToMakeChangeOfAcidityLevel(_ backgroundLayer: BackgroundLayerGameScene, didIncrease increase: Bool)
     func logicToChangeColorsOfChemicalReaction(_ backgroundLayer: BackgroundLayerGameScene, didDecrease decrease: Bool)
+    func logicToShowChemicalLog(_ backgroundLayer: BackgroundLayerGameScene, chemicalLog: ChemicalLog, didIncreaseAcidityLevel increase: Bool)
 }
 
 public class BackgroundLayerGameScene: SKNode {
@@ -86,6 +87,13 @@ public class BackgroundLayerGameScene: SKNode {
     }
     public var phLabelNode = SKLabelNode()
     
+    private var _chemicalLog: ChemicalLog
+    public var chemicalLog: ChemicalLog {
+        get  {
+            return _chemicalLog
+        }
+    }
+    
     //Initializers
     public init(sceneSize: CGSize) {
         
@@ -100,6 +108,8 @@ public class BackgroundLayerGameScene: SKNode {
         let mouthTexture = SKTexture(imageNamed: "mouth/mouth")
         self._mouth = Mouth(texture: mouthTexture)
         
+        //Initialize the chemicalLog
+        _chemicalLog = ChemicalLog()
         
         super.init()
         
@@ -131,6 +141,9 @@ public class BackgroundLayerGameScene: SKNode {
         self.addUpArrow()
         self.addDownArrow()
         self.addPhLabelNode()
+        
+        //Add the nodes of the chemicalLog
+        self.addChemicalLogNodes()
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -291,12 +304,20 @@ public class BackgroundLayerGameScene: SKNode {
         self.addChild(phLabelNode)
     }
     
+    private func addChemicalLogNodes() {
+        self._chemicalLog.addReagentToLayer(self, position: CGPoint(x: boardDesk.position.x*1.28, y: sceneSize.height*0.26))
+        self._chemicalLog.addProductOneToLayer(self, position: CGPoint(x: boardDesk.position.x*1.28, y: sceneSize.height*0.26))
+        self._chemicalLog.addProductTwoToLayer(self, position: CGPoint(x: boardDesk.position.x*1.28, y: sceneSize.height*0.26))
+        self._chemicalLog.addProductThreeToLayer(self, position: CGPoint(x: boardDesk.position.x*1.28, y: sceneSize.height*0.26))
+    }
+    
 }
 
 extension BackgroundLayerGameScene: ObserverBackgroundLayer {
     
     public func didChangeAcidityLevel(increase: Bool) {
         self.delegate?.logicToMakeChangeOfAcidityLevel(self, didIncrease: increase)
+        self.delegate?.logicToShowChemicalLog(self, chemicalLog: _chemicalLog, didIncreaseAcidityLevel: increase)
     }
     
     public func didChangeBacteryLevel(decrease: Bool) {
