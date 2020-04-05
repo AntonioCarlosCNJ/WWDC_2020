@@ -1,5 +1,46 @@
 import Foundation
 
+
+// ----- BACKGROUND LAYER TEXTURES ----- //
+
+public let BOARD_DESK_TX = "background/board_desk"
+public let SHELF_TX = "background/shelf"
+public let MOUTH_TX = "mouth/mouth"
+public let REAGENT_TX = "Main_Reaction/reagent"
+public let REAGENT_FULL_TX = "Main_Reaction/reagent_full"
+public let DIRECT_ARROW_TX = "Main_Reaction/direct"
+public let REVERSE_ARROW_TX = "Main_Reaction/reverse"
+public let PRODUCT_TX = "Main_Reaction/product"
+public let PRODUCT_FULL_TX = "Main_Reaction/product_full"
+public let PH_TITLE_TX = "chemistry/pH"
+public let UP_ARROW_TX = "chemistry/up_arrow"
+public let DOWN_ARROW_TX = "chemistry/down_arrow"
+
+// ----- BACKGROUND LAYER SPRITE NAMES ----- //
+
+public let BOARD_DESK_NAME = "boardDesk"
+public let SHELF_1_NAME = "shelf1"
+public let SHELF_2_NAME = "shelf2"
+public let SHELF_3_NAME = "shelf3"
+public let REAGENT_NAME = "reagent"
+public let REAGENT_FULL_NAME = "reagentFull"
+public let REVERSE_ARROW_NAME = "reverseArrow"
+public let DIRECT_ARROW_NAME = "directArrow"
+public let PRODUCT_NAME = "product"
+public let PRODUCT_FULL_NAME = "productFull"
+public let PH_TITLE_NAME = "pHTitleNode"
+public let UP_ARROW_NAME = "upArrow"
+public let DOWN_ARROW_NAME = "downArrow"
+
+// ----- BACKGROUND LAYER FONT NAMES ----- //
+
+public let PH_LABEL_FONT = "Hey October"
+
+// ----- BACKGROUND LAYER FONT SIZES ----- //
+
+public let PH_LABEL_FONT_SIZE: CGFloat = 26
+
+
 public enum zPositionOfElements: CGFloat {
     public typealias RawValue = CGFloat
     

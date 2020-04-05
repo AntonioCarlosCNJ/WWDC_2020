@@ -28,9 +28,7 @@ public class ToothBrush: Item {
         contactNode.name = "contactNode"
         contactNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         contactNode.zPosition = zPositionOfElements.item.rawValue
-        
-        print(node.size.width)
-        print(node.size.height)
+
         contactNode.position = CGPoint(x: node.size.width*1.7, y: node.size.height*1.8)
         
         node.addChild(contactNode)
