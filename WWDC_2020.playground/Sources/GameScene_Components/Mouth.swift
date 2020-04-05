@@ -41,14 +41,12 @@ public class Mouth {
     public var bacteriaAmount: Int = 0 {
         willSet{
             
-            if newValue > bacteriaAmount && _currentAcidityLevel < MIN_GOOD_ACIDITY_LEVEL {
-                
-                observer?.didChangeBacteryLevel(decrease: false)
-                
-            } else {
-                
-                observer?.didChangeBacteryLevel(decrease: true)
-                
+            if _currentAcidityLevel < MIN_GOOD_ACIDITY_LEVEL {
+                if newValue > bacteriaAmount {
+                    observer?.didChangeBacteryLevel(decrease: false)
+                } else {
+                    observer?.didChangeBacteryLevel(decrease: true)
+                }
             }
             
         }

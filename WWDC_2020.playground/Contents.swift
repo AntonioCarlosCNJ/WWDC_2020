@@ -5,9 +5,13 @@
 import PlaygroundSupport
 import SpriteKit
 
-let coordinator = FirstCoordinator(skView: SKView(frame: NSRect(x: 0, y: 0, width: 700, height: 500)))
+let skView = SKView(frame: NSRect(x: 0, y: 0, width: 700, height: 500))
 
-coordinator.start()
+let gameScene = GameScene(size: skView.frame.size)
 
-PlaygroundSupport.PlaygroundPage.current.liveView = coordinator.skView
+skView.presentScene(gameScene)
+skView.showsNodeCount = true
+skView.showsFPS = true
+
+PlaygroundSupport.PlaygroundPage.current.liveView = skView
 
