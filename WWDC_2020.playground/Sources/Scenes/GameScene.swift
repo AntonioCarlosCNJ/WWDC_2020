@@ -33,11 +33,11 @@ public class GameScene: SKScene {
 
         for clickedNode in nodes(at: location) {
             if clickedNode.name == "soda" {
-                gameLayer.duplicateItemNode(itemNode: clickedNode as! SKSpriteNode, name: "sodaSelected")
+                gameLayer.duplicateItemNode(itemNode: clickedNode as! SKSpriteNode)
             }
             
             if clickedNode.name == "sandwich" {
-                gameLayer.duplicateItemNode(itemNode: clickedNode as! SKSpriteNode, name: "sandwichSelected")
+                gameLayer.duplicateItemNode(itemNode: clickedNode as! SKSpriteNode)
             }
         }
         

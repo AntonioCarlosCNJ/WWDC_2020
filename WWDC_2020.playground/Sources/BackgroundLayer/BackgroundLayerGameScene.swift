@@ -20,7 +20,6 @@ public protocol BackgroundLayerDelegate: class {
 public class BackgroundLayerGameScene: SKNode {
      
     //Attributes
-    
     private var sceneSize: CGSize
     
     public weak var delegate: BackgroundLayerDelegate?
@@ -169,7 +168,7 @@ public class BackgroundLayerGameScene: SKNode {
      */
     private func addBackgroundColor() {
         backgroundColor.anchorPoint = CGPoint(x: 0, y: 0)
-        backgroundColor.zPosition = zPositionOfElements.backgroundColor.rawValue
+        backgroundColor.zPosition = zPositionBackgroundLayer.background.rawValue
         backgroundColor.isUserInteractionEnabled = true
         
         self.addChild(backgroundColor)
@@ -187,7 +186,7 @@ public class BackgroundLayerGameScene: SKNode {
     private func addBoardDesk(){
         boardDesk.anchorPoint = CGPoint(x: 0, y: 0)
         boardDesk.position = CGPoint(x: sceneSize.width*0.94 - boardDesk.frame.width, y: sceneSize.height*0.92 - boardDesk.frame.height)
-        boardDesk.zPosition = zPositionOfElements.boardDesk.rawValue
+        boardDesk.zPosition = zPositionBackgroundLayer.background.rawValue
         boardDesk.name = BOARD_DESK_NAME
         
         addChild(boardDesk)
@@ -200,11 +199,13 @@ public class BackgroundLayerGameScene: SKNode {
         1. anchorPoint
         2. position
         3. name
+        4. zPosition
      */
     private func addShelf1() {
         shelf1.anchorPoint = CGPoint(x: 0, y: 0)
         shelf1.position = CGPoint(x: sceneSize.width*0.02, y: sceneSize.height*0.09)
         shelf1.name = SHELF_1_NAME
+        shelf1.zPosition = zPositionBackgroundLayer.background.rawValue
         
         addChild(shelf1)
     }
@@ -216,11 +217,13 @@ public class BackgroundLayerGameScene: SKNode {
        1. anchorPoint
        2. position
        3. name
+       4. zPosition
     */
     private func addShelf2() {
         shelf2.anchorPoint = CGPoint(x: 0, y: 0)
         shelf2.position = CGPoint(x: sceneSize.width*0.02, y: shelf1.frame.maxY + sceneSize.height*0.1)
         shelf2.name = SHELF_2_NAME
+        shelf2.zPosition = zPositionBackgroundLayer.background.rawValue
         
         addChild(shelf2)
     }
@@ -232,11 +235,13 @@ public class BackgroundLayerGameScene: SKNode {
        1. anchorPoint
        2. position
        3. name
+       4. zPosition
     */
     private func addShelf3() {
         shelf3.anchorPoint = CGPoint(x: 0, y: 0)
         shelf3.position = CGPoint(x: sceneSize.width*0.02, y: shelf2.frame.maxY + sceneSize.height*0.1)
         shelf3.name = SHELF_3_NAME
+        shelf3.zPosition = zPositionBackgroundLayer.background.rawValue
         
         addChild(shelf3)
     }
@@ -254,7 +259,7 @@ public class BackgroundLayerGameScene: SKNode {
     private func addReagent() {
         _reagent.anchorPoint = .zero
         _reagent.position = CGPoint(x: boardDesk.position.x + boardDesk.size.width*0.06, y: boardDesk.position.y + boardDesk.size.height * 0.88)
-        _reagent.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        _reagent.zPosition = zPositionBackgroundLayer.chemical.rawValue
         _reagent.name = REAGENT_NAME
         
         /**
@@ -303,7 +308,7 @@ public class BackgroundLayerGameScene: SKNode {
         _reverseArrow.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         _reverseArrow.setScale(0.5)
         _reverseArrow.position = CGPoint(x:  _reagent.size.width + _reagent.position.x*1.1, y: _reagent.position.y*1.045)
-        _reverseArrow.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        _reverseArrow.zPosition = zPositionBackgroundLayer.chemical.rawValue
         _reverseArrow.name = REVERSE_ARROW_NAME
         
         self.addChild(_reverseArrow)
@@ -325,7 +330,7 @@ public class BackgroundLayerGameScene: SKNode {
         _directArrow.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         _directArrow.setScale(0.5)
         _directArrow.position = CGPoint(x: _reverseArrow.position.x, y: _reagent.position.y*1.075)
-        _directArrow.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        _directArrow.zPosition = zPositionBackgroundLayer.chemical.rawValue
         _directArrow.name = DIRECT_ARROW_NAME
         
         self.addChild(_directArrow)
@@ -344,7 +349,7 @@ public class BackgroundLayerGameScene: SKNode {
     private func addProduct() {
         _product.anchorPoint = .zero
         _product.position = CGPoint(x: _reverseArrow.size.width + _reverseArrow.position.x, y: _reagent.position.y*1.005)
-        _product.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        _product.zPosition = zPositionBackgroundLayer.chemical.rawValue
         _product.name = PRODUCT_NAME
         
         _product.alpha = 1.0
@@ -390,7 +395,7 @@ public class BackgroundLayerGameScene: SKNode {
         pHTitleNode.anchorPoint = CGPoint(x: 0, y: 0)
         pHTitleNode.position = CGPoint(x: boardDesk.position.x + boardDesk.size.width * 0.815,
                                        y: boardDesk.position.y + boardDesk.size.height * 0.52)
-        pHTitleNode.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        pHTitleNode.zPosition = zPositionBackgroundLayer.chemical.rawValue
         pHTitleNode.name = PH_TITLE_NAME
         
         self.addChild(pHTitleNode)
@@ -410,7 +415,7 @@ public class BackgroundLayerGameScene: SKNode {
         _upArrow.anchorPoint = CGPoint(x: 0, y: 0)
         _upArrow.position = CGPoint(x: pHTitleNode.position.x + (pHTitleNode.position.x*0.05),
                                    y: pHTitleNode.position.y*0.82)
-        _upArrow.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        _upArrow.zPosition = zPositionBackgroundLayer.chemical.rawValue
         _upArrow.name = UP_ARROW_NAME
         
         //Is hidden is true, because the scenes start with pH decreasing
@@ -432,7 +437,7 @@ public class BackgroundLayerGameScene: SKNode {
         _downArrow.anchorPoint = CGPoint(x: 0, y: 0)
         _downArrow.position = CGPoint(x: pHTitleNode.position.x + (pHTitleNode.position.x*0.05),
                                    y: pHTitleNode.position.y*0.82)
-        _downArrow.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        _downArrow.zPosition = zPositionBackgroundLayer.chemical.rawValue
         _downArrow.name = DOWN_ARROW_NAME
         
         self.addChild(_downArrow)
@@ -454,7 +459,7 @@ public class BackgroundLayerGameScene: SKNode {
         phLabelNode.position = CGPoint(x: pHTitleNode.position.x + (pHTitleNode.position.x*0.01),
                                        y: pHTitleNode.position.y*0.82)
         phLabelNode.fontSize = PH_LABEL_FONT_SIZE
-        phLabelNode.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        phLabelNode.zPosition = zPositionBackgroundLayer.chemical.rawValue
         
         self.addChild(phLabelNode)
     }
