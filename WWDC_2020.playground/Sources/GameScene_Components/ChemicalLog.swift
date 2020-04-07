@@ -3,10 +3,10 @@ import SpriteKit
 public class ChemicalLog {
     
     //Attributes
-    public var reagent = SKSpriteNode(imageNamed: "Main_Reaction/reagentLog")
-    public var productOne = SKSpriteNode(imageNamed: "Main_Reaction/productLog_1")
-    public var productTwo = SKSpriteNode(imageNamed: "Main_Reaction/productLog_2")
-    public var productThree = SKSpriteNode(imageNamed: "Main_Reaction/productLog_3")
+    public var reagent = SKSpriteNode(imageNamed: REAGENT_TX)
+    public var productOne = SKSpriteNode(imageNamed: PRODUCT_ONE_TX)
+    public var productTwo = SKSpriteNode(imageNamed: PRODUCT_TWO_TX)
+    public var productThree = SKSpriteNode(imageNamed: PRODUCT_THREE_TX)
     
     //Initializers
     public init() {
@@ -17,53 +17,78 @@ public class ChemicalLog {
     }
     
     //Methods
+    
+    /**
+     This method create the reagent log to chemical reaction
+     */
     private func createReagent() {
-        reagent.name = "reagentLog"
+        reagent.name = REAGENT_NAME
         reagent.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         reagent.zPosition = zPositionOfElements.chemicalReaction.rawValue
         
         reagent.alpha = .zero
     }
     
+    /**
+    This method create the product one log to chemical reaction
+    */
     private func createProductOne() {
-        productOne.name = "productOneLog"
+        productOne.name = PRODUCT_ONE_NAME
         productOne.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         productOne.zPosition = zPositionOfElements.chemicalReaction.rawValue
         
         productOne.alpha = .zero
     }
     
+    /**
+    This method create the product two log to chemical reaction
+    */
     private func createProductTwo() {
-        productTwo.name = "productTwoLog"
+        productTwo.name = PRODUCT_TWO_NAME
         productTwo.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         productTwo.zPosition = zPositionOfElements.chemicalReaction.rawValue
         
         productTwo.alpha = .zero
     }
     
+    /**
+    This method create the product three log to chemical reaction
+    */
     private func createProductThree() {
-        productThree.name = "productThreeLog"
+        productThree.name = PRODUCT_THREE_NAME
         productThree.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         productThree.zPosition = zPositionOfElements.chemicalReaction.rawValue + 1.0
         
         productThree.alpha = .zero
     }
     
+    /**
+     This method add the reagent log to background layer
+     */
     public func addReagentToLayer(_ backgroundLayer: BackgroundLayerGameScene, position: CGPoint) {
         self.reagent.position = position
         backgroundLayer.addChild(self.reagent)
     }
     
+    /**
+    This method add the product one log to background layer
+    */
     public func addProductOneToLayer(_ backgroundLayer: BackgroundLayerGameScene, position: CGPoint) {
         productOne.position = position
         backgroundLayer.addChild(productOne)
     }
     
+    /**
+    This method add the product two log to background layer
+    */
     public func addProductTwoToLayer(_ backgroundLayer: BackgroundLayerGameScene, position: CGPoint) {
         productTwo.position = position
         backgroundLayer.addChild(productTwo)
     }
     
+    /**
+    This method add the product three log to background layer
+    */
     public func addProductThreeToLayer(_ backgroundLayer: BackgroundLayerGameScene, position: CGPoint) {
         productThree.position = position
         backgroundLayer.addChild(productThree)

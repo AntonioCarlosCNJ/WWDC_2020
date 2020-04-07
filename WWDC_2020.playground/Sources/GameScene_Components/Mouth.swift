@@ -57,7 +57,7 @@ public class Mouth {
     public init(texture: SKTexture) {
         _node = SKSpriteNode(texture: texture)
         
-        _node.name = "mouth"
+        _node.name = MOUTH_NAME
         _node.anchorPoint = CGPoint(x: 0, y: 0)
         _node.zPosition = zPositionOfElements.mouth.rawValue
         

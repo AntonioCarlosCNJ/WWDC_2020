@@ -3,8 +3,8 @@ import SpriteKit
 public class ToothBrush: Item {
     
     // Attributes
-    public var node: SKSpriteNode = SKSpriteNode(imageNamed: "interactable_items/toothbrush")
-    public var contactNode: SKSpriteNode = SKSpriteNode(imageNamed: "interactable_items/contactNode")
+    public var node: SKSpriteNode = SKSpriteNode(imageNamed: TOOTHBRUSH_TEXTURE)
+    public var contactNode: SKSpriteNode = SKSpriteNode(imageNamed: CONTACT_TEXTURE)
     public var speedReproduction: TimeInterval?
     
     public var initialPosition: CGPoint = .zero
@@ -18,14 +18,14 @@ public class ToothBrush: Item {
     
     // Methods
     public func createNode() {
-        node.name = "toothBrush"
+        node.name = TOOTHBRUSH_NAME
         node.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         node.setScale(0.15)
         node.zPosition = zPositionOfElements.item.rawValue
     }
     
     public func createAndAddContactNodeToToothBrush() {
-        contactNode.name = "contactNode"
+        contactNode.name = CONTACT_NAME
         contactNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         contactNode.zPosition = zPositionOfElements.item.rawValue
 

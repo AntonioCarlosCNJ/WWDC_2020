@@ -3,7 +3,7 @@ import SpriteKit
 public class Soda: Item {
     
     //Attributes
-    public var node: SKSpriteNode = SKSpriteNode(imageNamed: "interactable_items/soda")
+    public var node: SKSpriteNode = SKSpriteNode(imageNamed: SODA_TX)
     public var speedReproduction: TimeInterval? = -1.6
     
     //Initializers
@@ -13,7 +13,7 @@ public class Soda: Item {
     
     //Methods
     public func createNode() {
-        node.name = "soda"
+        node.name = SODA_NAME
         node.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         node.setScale(0.15)
         node.zPosition = zPositionOfElements.item.rawValue

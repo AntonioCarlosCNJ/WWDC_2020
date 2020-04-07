@@ -3,7 +3,7 @@ import SpriteKit
 public class Sandwich: Item {
     
     //Attributes
-    public var node: SKSpriteNode = SKSpriteNode(imageNamed: "interactable_items/sandwich")
+    public var node: SKSpriteNode = SKSpriteNode(imageNamed: SANDWICH_TX)
     public var speedReproduction: TimeInterval? = -0.8
     
     //Initializers
@@ -13,7 +13,7 @@ public class Sandwich: Item {
     
     //Methods
     public func createNode() {
-        node.name = "sandwich"
+        node.name = SANDWICH_NAME
         node.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         node.setScale(0.15)
         node.zPosition = zPositionOfElements.item.rawValue

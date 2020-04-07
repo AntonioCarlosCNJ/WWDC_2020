@@ -38,9 +38,9 @@ public class Tooth {
             let xPosition = Int.random(in: Int(_node.size.width*0.18)..<Int(_node.size.width*0.85))
             let yPosition = Int.random(in: Int(_node.size.height*0.17)..<Int(_node.size.height*0.83))
             
-            let bacterium = SKSpriteNode(imageNamed: "chemistry/bacterium")
+            let bacterium = SKSpriteNode(imageNamed: BACTERIUM_TX)
             bacterium.setScale(0.5)
-            bacterium.name = "bacterium"
+            bacterium.name = BACTERIUM_NAME
             bacterium.position = CGPoint(x: xPosition, y: yPosition)
             
             observer?.decreaseAcidityLevel()

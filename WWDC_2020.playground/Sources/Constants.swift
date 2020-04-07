@@ -24,6 +24,7 @@ public let BOARD_DESK_NAME = "boardDesk"
 public let SHELF_1_NAME = "shelf1"
 public let SHELF_2_NAME = "shelf2"
 public let SHELF_3_NAME = "shelf3"
+public let MOUTH_NAME = "mouth"
 public let REAGENT_NAME = "reagent"
 public let REAGENT_FULL_NAME = "reagentFull"
 public let REVERSE_ARROW_NAME = "reverseArrow"
@@ -96,10 +97,52 @@ public let SANDWICH_SELECTED_NAME = "sandwichSelected"
 public let EATING_SOUND_EFFECT = "Sound_Effects/eating_sound"
 public let DRINKING_SOUND_EFFECT = "Sound_Effects/drinking_sound.mp4"
 
-// -----
+// ----- CHEMICAL LOG TEXTURES ----- //
+
+public let REAGENT_TX = "Main_Reaction/reagentLog"
+public let PRODUCT_ONE_TX = "Main_Reaction/productLog_1"
+public let PRODUCT_TWO_TX = "Main_Reaction/productLog_2"
+public let PRODUCT_THREE_TX = "Main_Reaction/productLog_3"
+
+// ----- CHEMICAL LOG SPRITE NAMES ----- //
+
+public let REAGENT_NAME = "reagentLog"
+public let PRODUCT_ONE_NAME = "productOneLog"
+public let PRODUCT_TWO_NAME = "productTwoLog"
+public let PRODUCT_THREE_NAME = "productThreeLog"
 
 
+// ----- TOOTH TEXTURES ----- //
 
+public let BACTERIUM_TX = "chemistry/bacterium"
 
+// ----- TOOTH SPRITE NAME ----- //
 
+public let BACTERIUM_NAME = "bacterium"
+
+// ----- TOOTHBRUSH TEXTURES ----- //
+
+public let TOOTHBRUSH_TEXTURE = "interactable_items/toothbrush"
+public let CONTACT_TEXTURE = "interactable_items/contactNode"
+
+// ----- TOOTHBRUSH SPRITES NAMES ----- //
+
+public let TOOTHBRUSH_NAME = "toothBrush"
+public let CONTACT_NAME = "contactNode"
+
+// ----- SODA TEXTURE ----- //
+
+public let SODA_TX = "interactable_items/soda"
+
+// ----- SODA SPRITES NAMES ----- //
+
+public let SODA_NAME = "soda"
+
+// ----- SANDWICH TEXTURES ----- //
+
+public let SANDWICH_TX = "interactable_items/sandwich"
+
+// ----- SANDWICH NAMES ----- //
+
+public let SANDWICH_NAME = "sandwich"
 
