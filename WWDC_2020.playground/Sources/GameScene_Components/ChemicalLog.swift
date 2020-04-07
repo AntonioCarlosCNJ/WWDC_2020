@@ -22,6 +22,7 @@ public class ChemicalLog {
      This method create the reagent log to chemical reaction
      */
     private func createReagent() {
+        reagent.setScale(0.5)
         reagent.name = REAGENT_NAME
         reagent.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         reagent.zPosition = zPositionBackgroundLayer.chemical.rawValue
@@ -33,6 +34,7 @@ public class ChemicalLog {
     This method create the product one log to chemical reaction
     */
     private func createProductOne() {
+        productOne.setScale(0.5)
         productOne.name = PRODUCT_ONE_NAME
         productOne.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         productOne.zPosition = zPositionBackgroundLayer.chemical.rawValue
@@ -44,6 +46,7 @@ public class ChemicalLog {
     This method create the product two log to chemical reaction
     */
     private func createProductTwo() {
+        productTwo.setScale(0.5)
         productTwo.name = PRODUCT_TWO_NAME
         productTwo.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         productTwo.zPosition = zPositionBackgroundLayer.chemical.rawValue
@@ -55,6 +58,7 @@ public class ChemicalLog {
     This method create the product three log to chemical reaction
     */
     private func createProductThree() {
+        productThree.setScale(0.5)
         productThree.name = PRODUCT_THREE_NAME
         productThree.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         productThree.zPosition = zPositionBackgroundLayer.chemical.rawValue

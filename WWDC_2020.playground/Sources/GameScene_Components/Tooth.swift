@@ -39,7 +39,6 @@ public class Tooth {
             let yPosition = Int.random(in: Int(_node.size.height*0.17)..<Int(_node.size.height*0.83))
             
             let bacterium = SKSpriteNode(imageNamed: BACTERIUM_TX)
-            bacterium.setScale(0.5)
             bacterium.name = BACTERIUM_NAME
             bacterium.position = CGPoint(x: xPosition, y: yPosition)
             

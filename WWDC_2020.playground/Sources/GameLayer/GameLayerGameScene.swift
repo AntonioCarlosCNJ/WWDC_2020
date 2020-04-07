@@ -265,6 +265,7 @@ public class GameLayerGameScene: SKNode {
      */
     private func cloneSKSpriteNode(node: SKSpriteNode) -> SKSpriteNode {
         let retNode = SKSpriteNode(texture: node.texture)
+        retNode.setScale(0.45)
         retNode.anchorPoint = node.anchorPoint
         retNode.position = node.position
         retNode.name = node.name! + SUFFIX_CLONE_CHEMICAL_LOG_NODE

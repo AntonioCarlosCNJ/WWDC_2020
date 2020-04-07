@@ -16,10 +16,13 @@
  
  Nossa boca é um ambiente muito propício à proliferação de bactérias, devido a sua temperatura em torno de 36˚C, ela está sempre úmida e possui um alto fluxo de nutrientes devido a nossa alimentação. Quando comemos ou bebemos, esses alimentos possuem açúcares que ficam depositados na nossa boca e esses açúcares servem de alimento para as bactérias que aumentam a sua proliferação. Resumindo, quanto mais açúcares o alimento tiver mais irá aumentar a velocidade de reprodução das bactérias.
  
- Com base nessa explicação, você sabe que quanto mais tempo ficamos sem escovar nossos dentes depois de fazer alguma refeição, mais bactérias teremos na nossa boca e isso poderá gerar problemas dentários. Mas qual o processo químico que ocorre até gerar esses problemas?
+ Com base nessa explicação, você sabe que quanto mais tempo ficamos sem escovar nossos dentes depois de fazer alguma refeição, mais bactérias teremos na nossa boca e isso poderá gerar a famosa cárie. Mas qual o processo químico que ocorre até gerar a cárie?
  
- O processo químico que gera esse problema é chamado de **Desmineralização** onde o principal componente do esmalte dentário dissolve pelo nível de acidez da boca diminuir conforme a proliferação de bactérias aumenta.
+ O processo químico que gera a cárie é chamado de **Desmineralização** onde o principal componente do esmalte dentário se dissolve pelo nível de acidez da boca diminuir conforme a proliferação de bactérias aumenta.
+ 
+ Porém esse processo pode ser revertido desde que nós mantemos uma higiene bucal constante, mesmo quando nós passamos um bom tempo sem nos alimentarmos. Agora você irá poder ver na prática como ocorre esse processo químico.
  */
+
 
 
 import PlaygroundSupport
@@ -30,7 +33,7 @@ let skView = SKView(frame: NSRect(x: 0, y: 0, width: 700, height: 500))
 let gameScene = GameScene(size: skView.frame.size)
 
 skView.presentScene(gameScene)
-skView.showsNodeCount = true
-skView.showsFPS = true
+//skView.showsNodeCount = true
+//skView.showsFPS = true
 
 PlaygroundSupport.PlaygroundPage.current.liveView = skView

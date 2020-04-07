@@ -119,6 +119,8 @@ public class BackgroundLayerGameScene: SKNode {
         
         super.init()
         
+//        self.setScale(0.5)
+        
         //Set the backgroundNodes
         self.addBackgroundColor()
         self.addBoardDesk()
@@ -126,14 +128,14 @@ public class BackgroundLayerGameScene: SKNode {
         //Set the mouth observer and add mouth to layer
         self._mouth.observer = self
         self._mouth.addMouthToLayer(backgroundLayer: self,
-                                    position: CGPoint(x: boardDesk.position.x + ((boardDesk.size.width - mouthTexture.size().width)/2),
+                                    position: CGPoint(x: boardDesk.position.x + ((boardDesk.size.width - mouth.node.size.width)/2),
                                                      y: sceneSize.height*0.12))
-        
+
         //Add shelfs to layer
         self.addShelf1()
         self.addShelf2()
         self.addShelf3()
-        
+
         //Add the nodes for main reaction
         self.addReagent()
         self.addReagentFull()
@@ -141,13 +143,13 @@ public class BackgroundLayerGameScene: SKNode {
         self.addDirectArrow()
         self.addProduct()
         self.addProductFull()
-        
+
         //Add the nodes to show acidity level(pH)
         self.addPhtitleNode()
         self.addUpArrow()
         self.addDownArrow()
         self.addPhLabelNode()
-        
+
         //Add the nodes of the chemicalLog
         self.addChemicalLogNodes()
     }
@@ -184,6 +186,7 @@ public class BackgroundLayerGameScene: SKNode {
         4. name
      */
     private func addBoardDesk(){
+        boardDesk.setScale(0.5)
         boardDesk.anchorPoint = CGPoint(x: 0, y: 0)
         boardDesk.position = CGPoint(x: sceneSize.width*0.94 - boardDesk.frame.width, y: sceneSize.height*0.92 - boardDesk.frame.height)
         boardDesk.zPosition = zPositionBackgroundLayer.background.rawValue
@@ -202,6 +205,7 @@ public class BackgroundLayerGameScene: SKNode {
         4. zPosition
      */
     private func addShelf1() {
+        shelf1.setScale(0.5)
         shelf1.anchorPoint = CGPoint(x: 0, y: 0)
         shelf1.position = CGPoint(x: sceneSize.width*0.02, y: sceneSize.height*0.09)
         shelf1.name = SHELF_1_NAME
@@ -220,6 +224,7 @@ public class BackgroundLayerGameScene: SKNode {
        4. zPosition
     */
     private func addShelf2() {
+        shelf2.setScale(0.5)
         shelf2.anchorPoint = CGPoint(x: 0, y: 0)
         shelf2.position = CGPoint(x: sceneSize.width*0.02, y: shelf1.frame.maxY + sceneSize.height*0.1)
         shelf2.name = SHELF_2_NAME
@@ -238,6 +243,7 @@ public class BackgroundLayerGameScene: SKNode {
        4. zPosition
     */
     private func addShelf3() {
+        shelf3.setScale(0.5)
         shelf3.anchorPoint = CGPoint(x: 0, y: 0)
         shelf3.position = CGPoint(x: sceneSize.width*0.02, y: shelf2.frame.maxY + sceneSize.height*0.1)
         shelf3.name = SHELF_3_NAME
@@ -257,6 +263,7 @@ public class BackgroundLayerGameScene: SKNode {
         5. alpha
      */
     private func addReagent() {
+        _reagent.setScale(0.5)
         _reagent.anchorPoint = .zero
         _reagent.position = CGPoint(x: boardDesk.position.x + boardDesk.size.width*0.06, y: boardDesk.position.y + boardDesk.size.height * 0.88)
         _reagent.zPosition = zPositionBackgroundLayer.chemical.rawValue
@@ -282,6 +289,7 @@ public class BackgroundLayerGameScene: SKNode {
        5. alpha
     */
     private func addReagentFull() {
+        _reagentFull.setScale(0.5)
         _reagentFull.anchorPoint = _reagent.anchorPoint
         _reagentFull.position = _reagent.position
         _reagentFull.zPosition = _reagent.zPosition
@@ -305,6 +313,7 @@ public class BackgroundLayerGameScene: SKNode {
         1. setScale
      */
     private func addReverseArrow() {
+        _reverseArrow.setScale(0.5)
         _reverseArrow.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         _reverseArrow.setScale(0.5)
         _reverseArrow.position = CGPoint(x:  _reagent.size.width + _reagent.position.x*1.1, y: _reagent.position.y*1.045)
@@ -327,6 +336,7 @@ public class BackgroundLayerGameScene: SKNode {
        1. setScale
     */
     private func addDirectArrow() {
+        _directArrow.setScale(0.5)
         _directArrow.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         _directArrow.setScale(0.5)
         _directArrow.position = CGPoint(x: _reverseArrow.position.x, y: _reagent.position.y*1.075)
@@ -347,6 +357,7 @@ public class BackgroundLayerGameScene: SKNode {
         5. alpha
      */
     private func addProduct() {
+        _product.setScale(0.5)
         _product.anchorPoint = .zero
         _product.position = CGPoint(x: _reverseArrow.size.width + _reverseArrow.position.x, y: _reagent.position.y*1.005)
         _product.zPosition = zPositionBackgroundLayer.chemical.rawValue
@@ -368,6 +379,7 @@ public class BackgroundLayerGameScene: SKNode {
         5. alpha
      */
     private func addProductFull() {
+        _productFull.setScale(0.5)
         _productFull.anchorPoint = _product.anchorPoint
         _productFull.position = _product.position
         _productFull.zPosition = _product.zPosition
@@ -392,6 +404,7 @@ public class BackgroundLayerGameScene: SKNode {
         4. name
      */
     public func addPhtitleNode() {
+        pHTitleNode.setScale(0.5)
         pHTitleNode.anchorPoint = CGPoint(x: 0, y: 0)
         pHTitleNode.position = CGPoint(x: boardDesk.position.x + boardDesk.size.width * 0.815,
                                        y: boardDesk.position.y + boardDesk.size.height * 0.52)
@@ -412,6 +425,7 @@ public class BackgroundLayerGameScene: SKNode {
         5. isHidden
      */
     public func addUpArrow() {
+        _upArrow.setScale(0.5)
         _upArrow.anchorPoint = CGPoint(x: 0, y: 0)
         _upArrow.position = CGPoint(x: pHTitleNode.position.x + (pHTitleNode.position.x*0.05),
                                    y: pHTitleNode.position.y*0.82)
@@ -434,6 +448,7 @@ public class BackgroundLayerGameScene: SKNode {
        4. name
     */
     public func addDownArrow() {
+        _downArrow.setScale(0.5)
         _downArrow.anchorPoint = CGPoint(x: 0, y: 0)
         _downArrow.position = CGPoint(x: pHTitleNode.position.x + (pHTitleNode.position.x*0.05),
                                    y: pHTitleNode.position.y*0.82)

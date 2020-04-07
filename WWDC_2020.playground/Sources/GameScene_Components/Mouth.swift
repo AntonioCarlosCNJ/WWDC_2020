@@ -57,6 +57,8 @@ public class Mouth {
     public init(texture: SKTexture) {
         _node = SKSpriteNode(texture: texture)
         
+        _node.setScale(0.5)
+        
         _node.name = MOUTH_NAME
         _node.anchorPoint = CGPoint(x: 0, y: 0)
         _node.zPosition = zPositionBackgroundLayer.mouth.rawValue
@@ -78,14 +80,14 @@ public class Mouth {
             _highTeeth[i-1].observer = self
         }
         
-        _highTeeth[0].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 192, y: 193))
-        _highTeeth[1].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 185, y: 197))
-        _highTeeth[2].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 153, y: 203))
-        _highTeeth[3].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 111, y: 205))
-        _highTeeth[4].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 1, y: 193))
-        _highTeeth[5].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 6, y: 198))
-        _highTeeth[6].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 24, y: 203))
-        _highTeeth[7].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 60, y: 205))
+        _highTeeth[0].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 384, y: 386))
+        _highTeeth[1].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 370, y: 394))
+        _highTeeth[2].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 306, y: 406))
+        _highTeeth[3].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 222, y: 410))
+        _highTeeth[4].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 2, y: 386))
+        _highTeeth[5].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 12, y: 396))
+        _highTeeth[6].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 48, y: 406))
+        _highTeeth[7].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 120, y: 410))
         
     }
     
@@ -96,14 +98,14 @@ public class Mouth {
             _lowTeeth[i-1].observer = self
         }
         
-        _lowTeeth[0].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 184, y: 85))
-        _lowTeeth[1].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 178, y: 67))
-        _lowTeeth[2].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 153, y: 54))
-        _lowTeeth[3].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 110, y: 49))
-        _lowTeeth[4].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 11, y: 83))
-        _lowTeeth[5].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 18, y: 67))
-        _lowTeeth[6].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 35, y: 54))
-        _lowTeeth[7].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 68, y: 48))
+        _lowTeeth[0].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 368, y: 170))
+        _lowTeeth[1].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 356, y: 134))
+        _lowTeeth[2].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 306, y: 108))
+        _lowTeeth[3].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 220, y: 98))
+        _lowTeeth[4].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 22, y: 166))
+        _lowTeeth[5].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 36, y: 134))
+        _lowTeeth[6].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 70, y: 108))
+        _lowTeeth[7].addToothToMouth(mouthNode: self._node, position: CGPoint(x: 136, y: 96))
         
     }
     
