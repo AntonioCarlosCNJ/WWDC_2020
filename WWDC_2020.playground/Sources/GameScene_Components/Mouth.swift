@@ -59,7 +59,7 @@ public class Mouth {
         
         _node.name = MOUTH_NAME
         _node.anchorPoint = CGPoint(x: 0, y: 0)
-        _node.zPosition = zPositionOfElements.mouth.rawValue
+        _node.zPosition = zPositionBackgroundLayer.mouth.rawValue
         
         createHighTeeth()
         createLowTeeth()

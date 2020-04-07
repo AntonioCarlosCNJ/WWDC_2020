@@ -34,19 +34,3 @@ skView.showsNodeCount = true
 skView.showsFPS = true
 
 PlaygroundSupport.PlaygroundPage.current.liveView = skView
-
-
-
-
-
-
-
-/**
- Átomos, moléculas, fórmulas complexas, este é o fundamento da química, mas para quem acha que isso é coisa só de pesquisa em laboratório, se enganou mesmo!
- 
- A química está presente no nosso dia a dia mais do que se imagina. Nosso corpo é formado inteiramente por átomos e moléculas. Tudo que nos rodeia também é composto de vários elementos, porém em estados e composições diferentes. Resumindo, tudo ao seu redor e dentro de você funciona e existe por causa da química!
- 
- Na química existem vários conceitos importantes, porém dois deles são fundamentais para enterdermos como ela funciona. Primeiro, os átomos, que são as menores partículas de qualquer coisa que existe e quando eu digo menores são menores mesmo. Para você entender o quanto eles são pequenos, um único grão de areia, é composto por bilhões de átomos. Segundo, são as moléculas, que são conjuntos de átomos, e até mesmo esse conjunto é extremamente pequeno.
- 
- Esses átomos e moléculas se misturam, reagem e provocam reações químicas, processo que acontece todo o tempo no nosso universo e cotidiano. E nesse projeto você vai poder ver um processo químico que ocorre todos os dias dentro da nossa boca!!
- */

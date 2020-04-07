@@ -99,14 +99,14 @@ public let DRINKING_SOUND_EFFECT = "Sound_Effects/drinking_sound.mp4"
 
 // ----- CHEMICAL LOG TEXTURES ----- //
 
-public let REAGENT_TX = "Main_Reaction/reagentLog"
+
 public let PRODUCT_ONE_TX = "Main_Reaction/productLog_1"
 public let PRODUCT_TWO_TX = "Main_Reaction/productLog_2"
 public let PRODUCT_THREE_TX = "Main_Reaction/productLog_3"
 
 // ----- CHEMICAL LOG SPRITE NAMES ----- //
 
-public let REAGENT_NAME = "reagentLog"
+
 public let PRODUCT_ONE_NAME = "productOneLog"
 public let PRODUCT_TWO_NAME = "productTwoLog"
 public let PRODUCT_THREE_NAME = "productThreeLog"
@@ -146,3 +146,13 @@ public let SANDWICH_TX = "interactable_items/sandwich"
 
 public let SANDWICH_NAME = "sandwich"
 
+// ----- HUD LAYER ZPOSITION ----- //
+
+public enum zPositionHudLayer: CGFloat {
+    public typealias RawValue = CGFloat
+    
+    case toothBrush = 1
+    case sandwich = 2
+    case soda = 3
+    
+}

@@ -21,13 +21,13 @@ public class ToothBrush: Item {
         node.name = TOOTHBRUSH_NAME
         node.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         node.setScale(0.15)
-        node.zPosition = zPositionOfElements.item.rawValue
+        node.zPosition = zPositionHudLayer.toothBrush.rawValue
     }
     
     public func createAndAddContactNodeToToothBrush() {
         contactNode.name = CONTACT_NAME
         contactNode.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        contactNode.zPosition = zPositionOfElements.item.rawValue
+        contactNode.zPosition = zPositionHudLayer.toothBrush.rawValue
 
         contactNode.position = CGPoint(x: node.size.width*1.7, y: node.size.height*1.8)
         

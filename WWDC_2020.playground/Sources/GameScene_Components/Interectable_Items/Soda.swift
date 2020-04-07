@@ -16,7 +16,7 @@ public class Soda: Item {
         node.name = SODA_NAME
         node.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         node.setScale(0.15)
-        node.zPosition = zPositionOfElements.item.rawValue
+        node.zPosition = zPositionHudLayer.soda.rawValue
     }
     
     public func addNodeToHudLayer(hudLayer: HudLayerGameScene, position: CGPoint) {

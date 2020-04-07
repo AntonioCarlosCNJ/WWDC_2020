@@ -24,7 +24,7 @@ public class ChemicalLog {
     private func createReagent() {
         reagent.name = REAGENT_NAME
         reagent.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        reagent.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        reagent.zPosition = zPositionBackgroundLayer.chemical.rawValue
         
         reagent.alpha = .zero
     }
@@ -35,7 +35,7 @@ public class ChemicalLog {
     private func createProductOne() {
         productOne.name = PRODUCT_ONE_NAME
         productOne.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        productOne.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        productOne.zPosition = zPositionBackgroundLayer.chemical.rawValue
         
         productOne.alpha = .zero
     }
@@ -46,7 +46,7 @@ public class ChemicalLog {
     private func createProductTwo() {
         productTwo.name = PRODUCT_TWO_NAME
         productTwo.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        productTwo.zPosition = zPositionOfElements.chemicalReaction.rawValue
+        productTwo.zPosition = zPositionBackgroundLayer.chemical.rawValue
         
         productTwo.alpha = .zero
     }
@@ -57,7 +57,7 @@ public class ChemicalLog {
     private func createProductThree() {
         productThree.name = PRODUCT_THREE_NAME
         productThree.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        productThree.zPosition = zPositionOfElements.chemicalReaction.rawValue + 1.0
+        productThree.zPosition = zPositionBackgroundLayer.chemical.rawValue
         
         productThree.alpha = .zero
     }
